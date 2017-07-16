@@ -1,8 +1,5 @@
 #include "VigenereCipher.h"
 
-#ifndef VIGENERE_CIPHER
-#define VIGENERE_CIPHER
-
 namespace VigenereCipher {
 
 	static bool is_valid_index (char index) {
