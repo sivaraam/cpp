@@ -1,5 +1,10 @@
 *.[oa]
 *.out
 *.gch
+
 # Ignore the eclipse file
 .project
+
+# Ignore the directory containing
+# playful test cases
+test/
