@@ -16,14 +16,6 @@ namespace CeaserCipher {
 
 			char get_char();
 
-			// increment operators
-			WrappingAlphabet& operator++ ();  //pre-increment operator
-			WrappingAlphabet& operator++ (int); //post-increment operator
-
-			//decrement operators
-			WrappingAlphabet& operator-- (); //pre-decrement operator
-			WrappingAlphabet& operator-- (int); //post-decrement operator
-
 			friend WrappingAlphabet operator+(const WrappingAlphabet& old, int offset);
 			friend WrappingAlphabet operator-(const WrappingAlphabet& old, int offset);
 			friend std::ostream& operator<<(std::ostream& out, const WrappingAlphabet& wa);
@@ -44,6 +36,7 @@ namespace CeaserCipher {
 	};
 
 //	WrappingAlphabet operator+(const WrappingAlphabet& old, int offset);       Works without these
+
 //	std::ostream& operator<<(std::ostream& out, const WrappingAlphabet& wa);
 
 //	string encrypt(const string& plain_text, int key);
