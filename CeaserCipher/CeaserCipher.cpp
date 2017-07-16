@@ -63,7 +63,7 @@ namespace CeaserCipher {
 
 	WrappingWord::WrappingWord(string word) {
 		for (char ch : word)
-			if(!isalpha(ch))
+			if(!is_valid(ch))
 				throw std::invalid_argument {"Word should contain only alphabets"};
 
 		this->word = word;
