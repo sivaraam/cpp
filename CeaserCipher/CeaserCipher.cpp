@@ -59,8 +59,6 @@ namespace CeaserCipher {
 
 
 	//--------------- BEGIN : 'WrappingWord' ---------------------
-	WrappingWord::WrappingWord() : word {} { }
-
 	WrappingWord::WrappingWord(string word) : word { word } {
 		// Initialize without check to prevent improper state of object
 		// It won't do much harm.

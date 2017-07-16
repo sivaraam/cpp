@@ -14,8 +14,7 @@ namespace VigenereCipher {
 	const CeaserCipher::WrappingWord VigenereRow::base_word { "ABCDEFGHIJKLMNOPQRSTUVWXYZ" };
 	const char VigenereRow::npos = -1;
 
-	VigenereRow::VigenereRow() { }
-	VigenereRow::VigenereRow(int index) : WrappingWord(base_word + index) { }
+	VigenereRow::VigenereRow(int index) : WrappingWord{base_word + index} { }
 
 	char VigenereRow::operator[] (const char index) const {
 		const char corrected_index = toupper(index);
@@ -36,7 +35,6 @@ namespace VigenereCipher {
 	// ------------- END : VigenereRow ----------------
 
 	// -------------- VigenereTable --------------------
-  
 	VigenereTable::VigenereTable() {
 		for (int curr_row=0; curr_row<total_rows; curr_row++)
 			this->rows[curr_row] = VigenereRow { curr_row };
@@ -90,4 +88,5 @@ namespace VigenereCipher {
 		}
 		return plain_text;
 	}
+
 }

@@ -14,6 +14,19 @@ namespace CeaserCipher {
 			WrappingAlphabet();
 			explicit WrappingAlphabet(char ch);
 
+			// Used at
+			//
+			//		return WrappingAlphabet{get_alphabet(old.ch, offset)};
+			//	and
+			//		return WrappingAlphabet{get_alphabet(old.ch, -offset)};
+			//
+			WrappingAlphabet(WrappingAlphabet&&) = default;
+
+			// delete the unwanted defaults
+			WrappingAlphabet(const WrappingAlphabet&) = delete;
+			WrappingAlphabet& operator= (const WrappingAlphabet&) = delete;
+			WrappingAlphabet& operator= (WrappingAlphabet&&) = delete;
+
 			char to_char();
 			WrappingAlphabet& operator= (char ch);
 
@@ -27,8 +40,29 @@ namespace CeaserCipher {
 		protected:
 			string word;
 		public:
-			WrappingWord();
+			WrappingWord() = default;
 			explicit WrappingWord(string word);
+
+			// Used at
+			//
+			//		VigenereRow::VigenereRow(int index) : WrappingWord (base_word + index) { }
+			// and
+			//		return WrappingWord {wrapped};
+			//
+			WrappingWord(WrappingWord&&) = default;
+
+
+			// delete the unwanted defaults
+			WrappingWord(const WrappingWord&) = delete;
+			WrappingWord& operator= (const WrappingWord&) = delete;
+
+
+			// Used as 'VigenereRow' requires move assignment
+			// Used at
+			//
+			//		this->rows[curr_row] = VigenereRow { curr_row };
+			//
+			WrappingWord& operator= (WrappingWord&&) = default;
 
 			string to_str();
 

@@ -11,10 +11,21 @@ namespace VigenereCipher {
 			static const CeaserCipher::WrappingWord base_word;
 
 		public:
-			VigenereRow();
-			explicit VigenereRow(int index);
 			static const char npos;
+
+			VigenereRow() = default;
+			explicit VigenereRow(int index);
+
+			// delete the unwanted defaults
+			VigenereRow(const VigenereRow&) = delete;
+			VigenereRow(VigenereRow&&) = delete;
+			VigenereRow& operator=(const VigenereRow&) = delete;
 			
+			// Used at
+			//
+			//         this->rows[curr_row] = VigenereRow { curr_row };
+			//
+			VigenereRow& operator=(VigenereRow&&) = default;
 			char operator[] (const char index) const;
 			// find the (char-based) index of the given character in the row
 			// if not found it returns VigenereRow::npos
@@ -30,11 +41,13 @@ namespace VigenereCipher {
 			VigenereTable();
 
 		public:
-			VigenereTable(VigenereTable const&) = delete;
-			void operator=(VigenereTable const&) = delete;
+			// delete the unwanted defaults
+			VigenereTable(const VigenereTable&) = delete;
+			VigenereTable(VigenereTable&&) = delete;
+			VigenereTable& operator=(const VigenereTable&) = delete;
+			VigenereTable& operator=(VigenereTable&&) = delete;
 
 			static const VigenereTable& getInstance();
-
 			const VigenereRow& operator[] (char index) const;
 	};
 
