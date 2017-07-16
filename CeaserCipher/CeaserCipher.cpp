@@ -2,17 +2,18 @@
 
 namespace CeaserCipher {
 
-	//---------------- BEGIN : 'WrappingAlphabet' ------------------
 	static bool is_valid(char ch) {
 		if(isalpha(ch))
 			return true;
 		return false;
 	}
 
+	//---------------- BEGIN : 'WrappingAlphabet' ------------------
 	WrappingAlphabet::WrappingAlphabet() : ch('A') { }
 
 	WrappingAlphabet::WrappingAlphabet(char ch) {
-		//Always store character in uppercase
+		// Always store character in uppercase
+		// Initialize without check to prevent improper state of object
 		this->ch = toupper(ch);
 
 		if(!is_valid(this->ch)) {
