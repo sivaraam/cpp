@@ -5,7 +5,7 @@ using std::cin;
 using std::string;
 
 int main() {
-	string plain_text, key;
+	string plain_text, key, encrypted;
 
 	cout<<"Enter the plain text: ";
 	cin>>plain_text;
@@ -13,14 +13,13 @@ int main() {
 	cout<<"Enter the key: ";
 	cin>>key;
 
-	string encrypted = VigenereCipher::encrypt(plain_text, key);
-
 	try {
-		cout<<"Encrypted text: "<<encrypted<<'\n';
+		encrypted = VigenereCipher::encrypt(plain_text, key);
 	} catch (std::invalid_argument in_arg) {
 			std::cerr<<"WARNING: Plain text and key should contain only alphabets\n";
 			exit(EXIT_FAILURE);
 	}
 
+	cout<<"Encrypted text: "<<encrypted<<'\n';
 	cout<<"Decrypted text: "<<VigenereCipher::decrypt(encrypted, key)<<'\n';
 }
