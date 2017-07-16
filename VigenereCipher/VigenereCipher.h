@@ -1,5 +1,8 @@
 #include "../CeaserCipher/CeaserCipher.h"
 
+#ifndef VIGENERE_CIPHER
+#define VIGENERE_CIPHER
+
 namespace VigenereCipher {
 
 	class VigenereRow : private CeaserCipher::WrappingWord {
@@ -34,3 +37,5 @@ namespace VigenereCipher {
 	string encrypt(string plain_text, string key);
 
 }
+
+#endif

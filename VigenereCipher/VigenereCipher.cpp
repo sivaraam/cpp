@@ -1,5 +1,8 @@
 #include "VigenereCipher.h"
 
+#ifndef VIGENERE_CIPHER
+#define VIGENERE_CIPHER
+
 namespace VigenereCipher {
 
 	// --------------- VigenereRow -------------------
