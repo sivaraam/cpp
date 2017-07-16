@@ -5,11 +5,17 @@
 
 namespace VigenereCipher {
 
+	static bool is_valid_index (char index) {
+		if (isalpha(index))
+			return true;
+		return false;
+	}
+
 	// --------------- VigenereRow -------------------
 	const CeaserCipher::WrappingWord VigenereRow::base_word { "ABCDEFGHIJKLMNOPQRSTUVWXYZ" }; 
 
 	char VigenereRow::operator[] (const char index) const {
-		if (!isalpha(index)) {
+		if (!is_valid_index(index)) {
 			throw std::invalid_argument { "Index should be an alphabet" };
 		}
 
@@ -32,7 +38,7 @@ namespace VigenereCipher {
 	}
 
 	const VigenereRow& VigenereTable::operator[] (char index) const {
-		if (!isalpha(index))
+		if (!is_valid_index(index))
 			throw std::invalid_argument { "Index should be an alphabet" };
 
 		size_t original_index = toupper(index) - 'A';
