@@ -11,8 +11,8 @@ namespace VigenereCipher {
 			static const CeaserCipher::WrappingWord base_word;
 
 		public:
-			VigenereRow() { }
-			VigenereRow(int index) : WrappingWord(base_word + index) { }
+			VigenereRow();
+			explicit VigenereRow(int index);
 			
 			char operator[] (const char index) const;
 	};

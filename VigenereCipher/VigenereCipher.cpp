@@ -9,7 +9,10 @@ namespace VigenereCipher {
 	}
 
 	// --------------- VigenereRow -------------------
-	const CeaserCipher::WrappingWord VigenereRow::base_word { "ABCDEFGHIJKLMNOPQRSTUVWXYZ" }; 
+	const CeaserCipher::WrappingWord VigenereRow::base_word { "ABCDEFGHIJKLMNOPQRSTUVWXYZ" };
+
+	VigenereRow::VigenereRow() { }
+	VigenereRow::VigenereRow(int index) : WrappingWord(base_word + index) { }
 
 	char VigenereRow::operator[] (const char index) const {
 		if (!is_valid_index(index)) {
