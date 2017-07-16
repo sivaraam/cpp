@@ -91,6 +91,9 @@ namespace CeaserCipher {
 			wrapped += (curr_ch-offset).to_char();
 		}
 
+		// TODO : Find the reason behind the resulting output
+		// obtained as a result of commenting the following
+		// return statement.
 		return WrappingWord {wrapped};
 	}
 
@@ -103,6 +106,7 @@ namespace CeaserCipher {
 		string input_word;
 		in>>input_word;
 		wword = WrappingWord { input_word };
+		return in;
 	}
 	//------------- END : Auxiliary methods  ----------------------
 	//--------------- END : 'WrappingWord' ------------------------
