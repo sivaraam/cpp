@@ -1,9 +1,8 @@
-#include "VigenereCipher.h"
 #include <iostream>
-using VigenereCipher::VigenereTable;
-using std::string;
+#include "VigenereCipher.h"
 using std::cout;
 using std::cin;
+using std::string;
 
 int main() {
 	string plain_text, key;
@@ -14,10 +13,14 @@ int main() {
 	cout<<"Enter the key: ";
 	cin>>key;
 
+	string encrypted = VigenereCipher::encrypt(plain_text, key);
+
 	try {
-		cout<<"Encrypted text: "<<VigenereCipher::encrypt(plain_text, key)<<'\n';
+		cout<<"Encrypted text: "<<encrypted<<'\n';
 	} catch (std::invalid_argument in_arg) {
 			std::cerr<<"WARNING: Plain text and key should contain only alphabets\n";
 			exit(EXIT_FAILURE);
 	}
+
+	cout<<"Decrypted text: "<<VigenereCipher::decrypt(encrypted, key)<<'\n';
 }
