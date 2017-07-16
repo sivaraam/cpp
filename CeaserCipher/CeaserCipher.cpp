@@ -17,7 +17,7 @@ namespace CeaserCipher {
 	}
 
 	WrappingAlphabet operator-(const WrappingAlphabet& old, int offset) {
-		return WrappingAlphabet{get_alphabet(old.ch, offset)};
+		return WrappingAlphabet{get_alphabet(old.ch, -offset)};
 	}
 
 	std::ostream& operator<<(std::ostream& out, const WrappingAlphabet& wa) {
