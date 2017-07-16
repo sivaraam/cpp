@@ -2,6 +2,7 @@
 
 namespace CeaserCipher {
 
+	//------------- BEGIN : Auxiliary methods for 'WrappingAlphabet' -------------
 	static char get_alphabet(char current, int offset) {
 		static const size_t TOTAL_ALPHABETS=26;
 
@@ -11,7 +12,6 @@ namespace CeaserCipher {
 		return char(rounded+'A');
 	}
 
-	//------------- BEGIN : Auxiliary methods for 'WrappingAlphabet' -------------
 	WrappingAlphabet operator+(const WrappingAlphabet& old, int offset) {
 		return WrappingAlphabet{get_alphabet(old.ch, offset)};
 	}
@@ -27,8 +27,7 @@ namespace CeaserCipher {
 	//------------- END : Auxiliary methods for 'WrappingAlphabet' --------------
 
 
-
-	//------------- BEGIN : Auxiliary methods for 'WrappingWord' --------------
+	//--------------- BEGIN : 'WrappingWord' ---------------------
 	WrappingWord::WrappingWord() : word {} { }
 
 	WrappingWord::WrappingWord(string word) {
@@ -39,6 +38,7 @@ namespace CeaserCipher {
 		this->word = word;
 	}
 
+	//------------- BEGIN : Auxiliary methods ---------------------
 	WrappingWord operator+(const WrappingWord& old, int offset) {
 		string wrapped {};
 	
@@ -71,9 +71,8 @@ namespace CeaserCipher {
 		in>>input_word;
 		wword = WrappingWord { input_word };
 	}
-	//------------- END : Auxiliary methods for 'WrappingWord' --------------
-
-
+	//------------- END : Auxiliary methods  ----------------------
+	//--------------- END : 'WrappingWord' ------------------------
 
 	string encrypt(const string& plain_text, int key) {
 		string encrypted_text {};
