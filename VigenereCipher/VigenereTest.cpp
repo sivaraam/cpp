@@ -14,5 +14,10 @@ int main() {
 	cout<<"Enter the key: ";
 	cin>>key;
 
-	cout<<"Encrypted text: "<<VigenereCipher::encrypt(plain_text, key)<<'\n';
+	try {
+		cout<<"Encrypted text: "<<VigenereCipher::encrypt(plain_text, key)<<'\n';
+	} catch (std::invalid_argument in_arg) {
+			std::cerr<<"WARNING: Plain text and key should contain only alphabets\n";
+			exit(EXIT_FAILURE);
+	}
 }
