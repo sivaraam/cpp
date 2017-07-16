@@ -20,6 +20,9 @@ namespace VigenereCipher {
 		}
 
 		size_t original_index = toupper(index) - 'A';
+		// Index should always be greater than zero
+		static_assert(original_index >= 0);
+
 		return word[original_index];
 	}
 	// ------------- END : VigenereRow ----------------
@@ -42,6 +45,9 @@ namespace VigenereCipher {
 			throw std::invalid_argument { "Index should be an alphabet" };
 
 		size_t original_index = toupper(index) - 'A';
+		// Index should always be greater than zero
+		static_assert(original_index >= 0);
+
 		return rows[original_index];
 	}
 	// --------------- END : VigenereTable -------------
