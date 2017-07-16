@@ -2,6 +2,8 @@
 
 namespace VigenereCipher {
 
+	static const char reference_ch = 'A';
+
 	static bool is_valid_index (char index) {
 		if (isalpha(index))
 			return true;
@@ -19,7 +21,7 @@ namespace VigenereCipher {
 		if (!is_valid_index(corrected_index))
 			throw std::invalid_argument { "Index should be an alphabet" };
 
-		size_t original_index = corrected_index - 'A';
+		size_t original_index = corrected_index - reference_ch;
 		return word[original_index];
 	}
 	// ------------- END : VigenereRow ----------------
@@ -42,7 +44,7 @@ namespace VigenereCipher {
 		if (!is_valid_index(corrected_index))
 			throw std::invalid_argument { "Index should be an alphabet" };
 
-		size_t original_index = corrected_index - 'A';
+		size_t original_index = corrected_index - reference_ch;
 		return rows[original_index];
 	}
 	// --------------- END : VigenereTable -------------
