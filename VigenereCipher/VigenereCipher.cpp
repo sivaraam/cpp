@@ -26,7 +26,7 @@ namespace VigenereCipher {
 		return word[original_index];
 	}
 
-	char VigenereRow::find (const char ch, size_t pos) {
+	char VigenereRow::find (const char ch, size_t pos) const {
 		size_t max = word.length();  // max is always 26
 		for(int index=pos; index<max; index++)
 			if(word[index] == ch)

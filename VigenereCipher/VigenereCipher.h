@@ -18,7 +18,7 @@ namespace VigenereCipher {
 			char operator[] (const char index) const;
 			// find the (char-based) index of the given character in the row
 			// if not found it returns VigenereRow::npos
-			char find (const char ch, size_t pos=0);
+			char find (const char ch, size_t pos=0) const;
 	};
 
 	class VigenereTable {
