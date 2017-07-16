@@ -9,12 +9,16 @@ namespace VigenereCipher {
 
 		private:
 			static const CeaserCipher::WrappingWord base_word;
+			static const char npos;
 
 		public:
 			VigenereRow();
 			explicit VigenereRow(int index);
 			
 			char operator[] (const char index) const;
+			// find the (char-based) index of the given character in the row
+			// if not found it returns VigenereRow::npos
+			char find (const char ch, size_t pos=0);
 	};
 
 	class VigenereTable {
