@@ -39,11 +39,10 @@ namespace CeaserCipher {
 	};
 
 //	WrappingAlphabet operator+(const WrappingAlphabet& old, int offset);       Works without these
-
 //	std::ostream& operator<<(std::ostream& out, const WrappingAlphabet& wa);
 
-//	string encrypt(const string& plain_text, int key);
-//	string decrypt(const string& encrypted_text, int key);
+	string encrypt(const string& plain_text, int key);
+	string decrypt(const string& encrypted_text, int key);
 
 }
 

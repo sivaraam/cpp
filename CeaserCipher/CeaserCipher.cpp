@@ -110,27 +110,15 @@ namespace CeaserCipher {
 	//--------------- END : 'WrappingWord' ------------------------
 
 	string encrypt(const string& plain_text, int key) {
-		string encrypted_text {};
-		WrappingAlphabet curr_ch;
+		WrappingWord plain_wword {plain_text};
 
-		for(char ch : plain_text) {
-			curr_ch = ch;
-			encrypted_text += (curr_ch+key).get_char();
-		}
-
-		return encrypted_text;
+		return (plain_wword+key).to_str();
 	}
 
 	string decrypt(const string& encrypted_text, int key) {
-		string plain_text {};
-		WrappingAlphabet curr_ch;
+		WrappingWord encrypted_wword{encrypted_text};
 
-		for(char ch : encrypted_text) {
-			curr_ch = ch;
-			plain_text += (curr_ch-key).get_char();
-		}
-
-		return plain_text;
+		return (encrypted_wword-key).to_str();
 	}
 
 }
