@@ -9,18 +9,12 @@ namespace CeaserCipher {
 	class WrappingAlphabet {
 		private:
 			char ch;
+
 		public:
-			WrappingAlphabet() : ch('A') {}
-			WrappingAlphabet(char ch) {
-				//Always store character in uppercase
-				this->ch = toupper(ch);
+			WrappingAlphabet();
+			explicit WrappingAlphabet(char ch);
 
-				if(!isalpha(this->ch)) {
-					throw std::invalid_argument { "Not an alphabet" };
-				}
-			}
-
-			char get_char() { return this->ch; }
+			char get_char();
 
 			// increment operators
 			WrappingAlphabet& operator++ ();  //pre-increment operator
@@ -41,7 +35,7 @@ namespace CeaserCipher {
 			string word;
 		public:
 			WrappingWord();
-			WrappingWord(string word);
+			explicit WrappingWord(string word);
 
 			friend WrappingWord operator+(const WrappingWord& old, int offset);
 			friend WrappingWord operator-(const WrappingWord& old, int offset);

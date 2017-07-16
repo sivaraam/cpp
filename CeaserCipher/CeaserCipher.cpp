@@ -2,7 +2,27 @@
 
 namespace CeaserCipher {
 
-	//------------- BEGIN : Auxiliary methods for 'WrappingAlphabet' -------------
+	//---------------- BEGIN : 'WrappingAlphabet' ------------------
+	static bool is_valid(char ch) {
+		if(isalpha(ch))
+			return true;
+		return false;
+	}
+
+	WrappingAlphabet::WrappingAlphabet() : ch('A') { }
+
+	WrappingAlphabet::WrappingAlphabet(char ch) {
+		//Always store character in uppercase
+		this->ch = toupper(ch);
+
+		if(!is_valid(this->ch)) {
+			throw std::invalid_argument { "Not an alphabet" };
+		}
+	}
+
+	char WrappingAlphabet::get_char() { return ch; }
+
+	//---------------- BEGIN : Auxiliary methods ------------------
 	static char get_alphabet(char current, int offset) {
 		static const size_t TOTAL_ALPHABETS=26;
 
@@ -24,7 +44,8 @@ namespace CeaserCipher {
 		out<<wa.ch;
 		return out;
 	}
-	//------------- END : Auxiliary methods for 'WrappingAlphabet' --------------
+	//----------------- END : Auxiliary methods  -------------------
+	//------------------ END : 'WrappingAlphabet' ------------------
 
 
 	//--------------- BEGIN : 'WrappingWord' ---------------------
