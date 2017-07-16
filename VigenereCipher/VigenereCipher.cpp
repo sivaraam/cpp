@@ -15,11 +15,11 @@ namespace VigenereCipher {
 	VigenereRow::VigenereRow(int index) : WrappingWord(base_word + index) { }
 
 	char VigenereRow::operator[] (const char index) const {
-		if (!is_valid_index(index)) {
+		const char corrected_index = toupper(index);
+		if (!is_valid_index(corrected_index))
 			throw std::invalid_argument { "Index should be an alphabet" };
-		}
 
-		size_t original_index = toupper(index) - 'A';
+		size_t original_index = corrected_index - 'A';
 		return word[original_index];
 	}
 	// ------------- END : VigenereRow ----------------
@@ -38,10 +38,11 @@ namespace VigenereCipher {
 	}
 
 	const VigenereRow& VigenereTable::operator[] (char index) const {
-		if (!is_valid_index(index))
+		const char corrected_index = toupper(index);
+		if (!is_valid_index(corrected_index))
 			throw std::invalid_argument { "Index should be an alphabet" };
 
-		size_t original_index = toupper(index) - 'A';
+		size_t original_index = corrected_index - 'A';
 		return rows[original_index];
 	}
 	// --------------- END : VigenereTable -------------
