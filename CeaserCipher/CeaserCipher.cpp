@@ -22,6 +22,15 @@ namespace CeaserCipher {
 
 	char WrappingAlphabet::get_char() { return ch; }
 
+	WrappingAlphabet& WrappingAlphabet::operator= (char ch) {
+		char upper_ch = toupper(ch);
+		if (!is_valid(upper_ch))
+			throw std::invalid_argument { "Not an alphabet" };
+
+		this->ch = upper_ch;
+		return *this;
+	}
+
 	//---------------- BEGIN : Auxiliary methods ------------------
 	static char get_alphabet(char current, int offset) {
 		static const size_t TOTAL_ALPHABETS=26;

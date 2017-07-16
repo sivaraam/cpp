@@ -15,6 +15,7 @@ namespace CeaserCipher {
 			explicit WrappingAlphabet(char ch);
 
 			char get_char();
+			WrappingAlphabet& operator= (char ch);
 
 			friend WrappingAlphabet operator+(const WrappingAlphabet& old, int offset);
 			friend WrappingAlphabet operator-(const WrappingAlphabet& old, int offset);
