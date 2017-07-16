@@ -1,3 +1,5 @@
 *.[oa]
 *.out
 *.gch
+# Ignore the eclipse file
+.project
