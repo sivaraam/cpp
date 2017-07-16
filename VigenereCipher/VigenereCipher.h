@@ -9,11 +9,11 @@ namespace VigenereCipher {
 
 		private:
 			static const CeaserCipher::WrappingWord base_word;
-			static const char npos;
 
 		public:
 			VigenereRow();
 			explicit VigenereRow(int index);
+			static const char npos;
 			
 			char operator[] (const char index) const;
 			// find the (char-based) index of the given character in the row
