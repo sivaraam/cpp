@@ -70,4 +70,18 @@ namespace VigenereCipher {
 		}
 		return encrypted_text;
 	}
+
+	// The VigenereTable is a symmetric matrix thus easing the implementation
+	string decrypt(string encrypted_text, string key) {
+		string plain_text;
+		size_t key_index = 0, key_length = key.length();
+		const VigenereTable& vtable = VigenereTable::getInstance();
+
+		for(char curr_enc_ch : encrypted_text) {
+			char curr_key_ch = key[key_index];
+			plain_text += vtable[curr_key_ch].find(curr_enc_ch);
+			key_index = (key_index + 1)%key_length;
+		}
+		return plain_text;
+	}
 }

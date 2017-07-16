@@ -39,6 +39,7 @@ namespace VigenereCipher {
 	};
 
 	string encrypt(string plain_text, string key);
+	string decrypt(string encrypted_text, string key);
 
 }
 
