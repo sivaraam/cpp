@@ -79,7 +79,13 @@ namespace VigenereCipher {
 
 		for(char curr_enc_ch : encrypted_text) {
 			char curr_key_ch = key[key_index];
-			plain_text += vtable[curr_key_ch].find(curr_enc_ch);
+			char plain_ch = vtable[curr_key_ch].find(curr_enc_ch);
+
+			// This shouldn't happen. Just in case.
+			if (plain_ch == VigenereRow::npos)
+				throw std::invalid_argument("Encrypted text contains invalid characters");
+
+			plain_text += plain_ch;
 			key_index = (key_index + 1)%key_length;
 		}
 		return plain_text;
