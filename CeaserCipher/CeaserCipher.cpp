@@ -71,9 +71,10 @@ namespace CeaserCipher {
 	//------------- BEGIN : Auxiliary methods ---------------------
 	WrappingWord operator+(const WrappingWord& old, int offset) {
 		string wrapped {};
-	
+		WrappingAlphabet curr_ch;
+
 		for(char ch : old.word) {
-			WrappingAlphabet curr_ch { ch };
+			curr_ch = ch;
 			wrapped += (curr_ch+offset).get_char();
 		}
 
@@ -82,9 +83,10 @@ namespace CeaserCipher {
 
 	WrappingWord operator-(const WrappingWord& old, int offset) {
 		string wrapped {};
-	
+		WrappingAlphabet curr_ch;
+
 		for(char ch : old.word) {
-			WrappingAlphabet curr_ch { ch };
+			curr_ch = ch;
 			wrapped += (curr_ch-offset).get_char();
 		}
 
@@ -106,9 +108,10 @@ namespace CeaserCipher {
 
 	string encrypt(const string& plain_text, int key) {
 		string encrypted_text {};
+		WrappingAlphabet curr_ch;
 
 		for(char ch : plain_text) {
-			WrappingAlphabet curr_ch { ch };
+			curr_ch = ch;
 			encrypted_text += (curr_ch+key).get_char();
 		}
 
@@ -117,9 +120,10 @@ namespace CeaserCipher {
 
 	string decrypt(const string& encrypted_text, int key) {
 		string plain_text {};
+		WrappingAlphabet curr_ch;
 
 		for(char ch : encrypted_text) {
-			WrappingAlphabet curr_ch { ch };
+			curr_ch = ch;
 			plain_text += (curr_ch-key).get_char();
 		}
 
