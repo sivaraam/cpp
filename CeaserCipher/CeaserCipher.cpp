@@ -61,12 +61,12 @@ namespace CeaserCipher {
 	//--------------- BEGIN : 'WrappingWord' ---------------------
 	WrappingWord::WrappingWord() : word {} { }
 
-	WrappingWord::WrappingWord(string word) {
-		for (char ch : word)
+	WrappingWord::WrappingWord(string word) : word { word } {
+		// Initialize without check to prevent improper state of object
+		// It won't do much harm.
+		for (char ch : this->word)
 			if(!is_valid(ch))
 				throw std::invalid_argument {"Word should contain only alphabets"};
-
-		this->word = word;
 	}
 
 	string WrappingWord::to_str() { return word; }
