@@ -21,7 +21,7 @@ namespace CeaserCipher {
 		}
 	}
 
-	char WrappingAlphabet::get_char() { return ch; }
+	char WrappingAlphabet::to_char() { return ch; }
 
 	WrappingAlphabet& WrappingAlphabet::operator= (char ch) {
 		char upper_ch = toupper(ch);
@@ -69,6 +69,8 @@ namespace CeaserCipher {
 		this->word = word;
 	}
 
+	string WrappingWord::to_str() { return word; }
+
 	//------------- BEGIN : Auxiliary methods ---------------------
 	WrappingWord operator+(const WrappingWord& old, int offset) {
 		string wrapped {};
@@ -76,7 +78,7 @@ namespace CeaserCipher {
 
 		for(char ch : old.word) {
 			curr_ch = ch;
-			wrapped += (curr_ch+offset).get_char();
+			wrapped += (curr_ch+offset).to_char();
 		}
 
 		return WrappingWord {wrapped};
@@ -88,7 +90,7 @@ namespace CeaserCipher {
 
 		for(char ch : old.word) {
 			curr_ch = ch;
-			wrapped += (curr_ch-offset).get_char();
+			wrapped += (curr_ch-offset).to_char();
 		}
 
 		return WrappingWord {wrapped};

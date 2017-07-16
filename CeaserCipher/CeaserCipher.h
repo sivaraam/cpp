@@ -14,7 +14,7 @@ namespace CeaserCipher {
 			WrappingAlphabet();
 			explicit WrappingAlphabet(char ch);
 
-			char get_char();
+			char to_char();
 			WrappingAlphabet& operator= (char ch);
 
 			friend WrappingAlphabet operator+(const WrappingAlphabet& old, int offset);
@@ -29,6 +29,8 @@ namespace CeaserCipher {
 		public:
 			WrappingWord();
 			explicit WrappingWord(string word);
+
+			string to_str();
 
 			friend WrappingWord operator+(const WrappingWord& old, int offset);
 			friend WrappingWord operator-(const WrappingWord& old, int offset);
