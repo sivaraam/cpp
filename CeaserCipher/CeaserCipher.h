@@ -1,6 +1,5 @@
 #include <iostream>
-#include <ctype.h>
-#include <stdlib.h>
+#include <locale>
 using std::string;
 
 #ifndef CEASER_CIPHER
