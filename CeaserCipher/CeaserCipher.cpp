@@ -2,21 +2,22 @@
 
 namespace CeaserCipher {
 
-	static const size_t TOTAL_ALPHABETS=26;
+	static char get_alphabet(char current, int offset) {
+		static const size_t TOTAL_ALPHABETS=26;
+
+		int ch_with_offset = (current-'A') + offset + ((offset < 0) ? TOTAL_ALPHABETS : 0);
+		unsigned int rounded = ch_with_offset % TOTAL_ALPHABETS;
+
+		return char(rounded+'A');
+	}
 
 	//------------- BEGIN : Auxiliary methods for 'WrappingAlphabet' -------------
 	WrappingAlphabet operator+(const WrappingAlphabet& old, int offset) {
-		char curr_ch = old.ch;
-		int ch_with_offset = (curr_ch-'A') + offset;
-		int rounded = ch_with_offset % 26;
-		return WrappingAlphabet{char(rounded+'A')};
+		return WrappingAlphabet{get_alphabet(old.ch, offset)};
 	}
 
 	WrappingAlphabet operator-(const WrappingAlphabet& old, int offset) {
-		char curr_ch = old.ch;
-		int ch_with_offset = (curr_ch-'A') + TOTAL_ALPHABETS - offset;
-		int rounded = ch_with_offset % TOTAL_ALPHABETS;
-		return WrappingAlphabet{char(rounded+'A')};
+		return WrappingAlphabet{get_alphabet(old.ch, offset)};
 	}
 
 	std::ostream& operator<<(std::ostream& out, const WrappingAlphabet& wa) {
@@ -27,7 +28,7 @@ namespace CeaserCipher {
 
 
 
-	//------------- BEGIN : Auxiliary methodsfor 'WrappingWord' --------------
+	//------------- BEGIN : Auxiliary methods for 'WrappingWord' --------------
 	WrappingWord::WrappingWord() : word {} { }
 
 	WrappingWord::WrappingWord(string word) {
