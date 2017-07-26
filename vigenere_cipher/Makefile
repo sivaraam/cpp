@@ -1,13 +1,16 @@
-implementations = "vigenere_cipher.cpp"
-implementations += "../ceaser_cipher/ceaser_cipher.cpp"
+implementation = "vigenere_cipher.cpp"
+dependency = "../ceaser_cipher/ceaser_cipher.cpp"
 test_file = "cipher_test.cpp"
+
+gcc_compatible_compiler = "g++"
+opts = "-std=c++11"
 
 all:
 	# just compile the implementation
-	g++ -S -std=c++14 $(implementations)
+	$(gcc_compatible_compiler) -S $(opts) $(dependency) $(implementation)
 build:
-	g++ $(implementations) $(test_file)
+	$(gcc_compatible_compiler) $(opts) $(dependency) $(implementation) $(test_file)
 
-# TODO: try optimizing the source
+# TODO: measure performance difference
 optimize::
-	g++ -O3 $(implementations) $(test_file)
+	$(gcc_compatible_compiler) -O3 $(opts) $(dependency) $(implementation) $(test_file)
