@@ -1,6 +1,6 @@
-#include "CeaserCipher.h"
+#include "ceaser_cipher.h"
 #include <iostream>
-//using CeaserCipher::WrappingWord;
+//using ceaser_cipher::WrappingWord;
 using std::string;
 using std::cout;
 using std::cin;
@@ -25,8 +25,8 @@ int main() {
 
 	unsigned int key = get_key();
 
-	string encrypted = CeaserCipher::encrypt(plain_text, key);
-	string decrypted = CeaserCipher::decrypt(encrypted, key);
+	string encrypted = ceaser_cipher::encrypt(plain_text, key);
+	string decrypted = ceaser_cipher::decrypt(encrypted, key);
 
 	cout<<"Encrypted Text: "<<encrypted<<'\n';
 	cout<<"Decrypted Text: "<<decrypted<<'\n';
