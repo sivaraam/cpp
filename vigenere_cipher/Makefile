@@ -10,4 +10,4 @@ build:
 
 # TODO: try optimizing the source
 optimize::
-	g++ -O3 $(implementations)
+	g++ -O3 $(implementations) $(test_file)
