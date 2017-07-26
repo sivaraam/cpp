@@ -1,10 +1,12 @@
 implementation = "ceaser_cipher.cpp"
 test_file = "cipher_test.cpp"
+
+gcc_compatible_compiler = "clang++"
 opts = "-std=c++11"
 
 all::
 	# just compile the implementation
-	clang++ -S $(opts) $(implementation)
+	$(gcc_compatible_compiler) -S $(opts) $(implementation)
 
 build::
-	clang++ $(opts) $(implementation) $(test_file)
+	$(gcc_compatible_compiler) $(opts) $(implementation) $(test_file)
