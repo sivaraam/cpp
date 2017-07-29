@@ -2,6 +2,7 @@
 #include <vector>
 #include <cmath>
 #include <exception>
+#include <locale>
 
 namespace hill_cipher {
 
@@ -52,7 +53,6 @@ namespace hill_cipher {
 	// converts value in range [0,26) to the correspondinng uppercase character
 	static char value(int val) {
 
-		// TODO check 'expected type_specifier' ans 'std' doesn't name a type
 		if(!is_valid(val)) {
 			throw new std::invalid_argument { "Not a valid char value\n"
 								    "Only values in range [0, 26) are valid" };
@@ -62,10 +62,12 @@ namespace hill_cipher {
 
 	}
 
-	// TODO
 	// converts all character to uppercase
 	static void normalize(string& input) {
 		
+		auto& facet = std::use_facet<std::ctype<char>>(std::locale());
+		facet.toupper(&input[0], &input[0] + input.length());
+
 	}
 
 	// returns a vector of int values for the characters in 'input'
