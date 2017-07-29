@@ -71,6 +71,9 @@ namespace hill_cipher {
 		return int_vals;
 	}
 
+	static void pad_with_zeros(vector<int>& vec_to_pad, size_t zero_num) {
+		for(size_t i=0; i<zero_num; i++)
+			vec_to_pad.push_back(0);
 	}
 
 	// creates 1*degree matrices from the given vector of integers
@@ -82,6 +85,9 @@ namespace hill_cipher {
 		// 'matrix_num' vectors of size 'degree'
 		vector< vector<int> > matrices (matrix_num, vector<int>(degree));
 
+		// pad 'vals' with zeros in case it isn't a multiple of degree
+		const int missing_nums = vals.size() % degree;
+		pad_with_zeros(vals, missing_nums);
 
 		for(size_t curr_matrix_index=0; curr_matrix_index < matrix_num; curr_matrix_index++) {
 
