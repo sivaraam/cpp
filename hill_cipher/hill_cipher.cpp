@@ -88,8 +88,8 @@ namespace hill_cipher {
 		// convert degree to double to trigger floating-point division
 		const size_t matrix_num = ceil(vals.size() / double(degree));
 
-		// TODO 'matrix_num' vectors of size 'degree' ?
-		vector< vector<int> > matrices (matrix_num);
+		// 'matrix_num' vectors of size 'degree'
+		vector< vector<int> > matrices (matrix_num, vector<int>(degree));
 
 		for(int curr_matrix_index=0; curr_matrix_index < matrix_num; curr_matrix_index++) {
 			for(int curr_val_index=0; curr_val_index < degree; curr_val_index++) {
