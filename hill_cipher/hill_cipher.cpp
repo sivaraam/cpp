@@ -6,6 +6,7 @@
 namespace hill_cipher {
 
 	istream& operator>> (istream& is, cipher_matrix& cmatrix) {
+
 		for (int i=0; i<cmatrix.degree; i++) {
 			for (int j=0; j<cmatrix.degree; j++) {
 				is>>cmatrix.matrix[i][j];
@@ -16,28 +17,36 @@ namespace hill_cipher {
 			}
 
 		}
+
+		return is;
 	}
 
 	static bool is_valid(char ch) {
+
 		if(isalpha(ch) && isupper(ch))
 			return true;
 
 		return false;
+
 	}
 
 	// converts uppercase alphabet to a value iin range [0, 26)
 	static int value(char ch) {
+
 		if(!is_valid(ch))
 			throw new std::invalid_argument("Not a valid character\n"
 								  "Only uppercase alphabets are valid");
 		return (ch - 'A');
+
 	}
 
 	static bool is_valid(int val) {
+
 		if(val>=0 && val<26)
 			return true;
 
 		return false;
+
 	}
 
 	// converts value in range [0,26) to the correspondinng uppercase character
@@ -50,6 +59,7 @@ namespace hill_cipher {
 		}
 
 		return (val + 'A');
+
 	}
 
 	// TODO
@@ -69,6 +79,7 @@ namespace hill_cipher {
 			int_vals.push_back(value(ch));
 
 		return int_vals;
+
 	}
 
 	// creates 1*degree matrices from the given vector of integers
@@ -89,6 +100,7 @@ namespace hill_cipher {
 		}
 
 		return matrices;
+
 	}
 
 	// creates a 1*degree matrices from the given plain_text
