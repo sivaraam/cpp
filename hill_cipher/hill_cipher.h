@@ -7,13 +7,14 @@ using std::vector;
 namespace hill_cipher {
 
 	// Contract:
-	// 	There is a contract between the public instance
-	// methods of this class and the overloaded "input stream"
-	// operator.
 	//
-	// Any public methods of this class must be invoked only
-	// after the "successful" invocation of the input stream
-	// operator atleast once. Else, the behaviour is "undefined".
+	//	There is a contract between the methods that reference
+	//	this class and the overloaded "input stream"
+	//	operator.
+	//
+	//	Any methods that references this class must be invoked only
+	//	after the "successful" invocation of the overloaded input
+	//	stream operator atleast once. Else, the behaviour is "undefined".
 	// 
 	class cipher_matrix{
 		vector< vector<int> > matrix;
