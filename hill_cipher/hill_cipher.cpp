@@ -28,7 +28,7 @@ namespace hill_cipher {
 	// converts uppercase alphabet to a value iin range [0, 26)
 	static int value(char ch) {
 		if(!is_valid(ch))
-			throw new invalid_argument_exception("Not a valid character\n"
+			throw new std::invalid_argument("Not a valid character\n"
 								  "Only uppercase alphabets are valid");
 		return (ch - 'A');
 	}
@@ -45,7 +45,7 @@ namespace hill_cipher {
 
 		// TODO check 'expected type_specifier' ans 'std' doesn't name a type
 		if(!is_valid(val)) {
-			throw new std::invalid_argument_exception { "Not a valid char value\n"
+			throw new std::invalid_argument { "Not a valid char value\n"
 								    "Only values in range [0, 26) are valid" };
 		}
 
