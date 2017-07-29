@@ -7,15 +7,13 @@
 namespace hill_cipher {
 
 	istream& operator>> (istream& is, cipher_matrix& cmatrix) {
+		// throw exception in case of failure.
+		// to halt or alter flow of program
+		is.exceptions(std::ios_base::failbit);
 		for (size_t i=0; i<cmatrix.degree; i++) {
 			for (size_t j=0; j<cmatrix.degree; j++) {
 				is>>cmatrix.matrix[i][j];
-				/* TODO	
-				if(is::fail) {
-					throw new std::exception("Could not read the cipher matrix");
-				}*/
 			}
-
 		}
 
 		return is;
