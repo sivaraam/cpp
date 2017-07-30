@@ -19,20 +19,6 @@ namespace hill_cipher {
 		return is;
 	}
 
-	static bool is_valid(char ch) {
-		if(isalpha(ch) && isupper(ch))
-			return true;
-
-		return false;
-	}
-
-	// converts uppercase alphabet to a value in range [0, 26)
-	static int value(char ch) {
-		if(!is_valid(ch))
-			throw new std::invalid_argument("Not a valid character\n"
-								  "Only uppercase alphabets are valid");
-		return (ch - 'A');
-	}
 
 	static bool is_valid(int val) {
 		if(val>=0 && val<26)
@@ -44,34 +30,16 @@ namespace hill_cipher {
 	// converts value in range [0,26) to the correspondinng uppercase character
 	static char value(int val) {
 		if(!is_valid(val)) {
-			throw new std::invalid_argument { "Not a valid char value\n"
-								    "Only values in range [0, 26) are valid" };
+			throw new std::invalid_argument("Not a valid char value\n"
+							"Only values in range [0, 26) are valid");
 		}
 
 		return (val + 'A');
 	}
 
-	// converts all character to uppercase
-	static void normalize(string& input) {
-		auto& facet = std::use_facet<std::ctype<char>>(std::locale());
-		facet.toupper(&input[0], &input[0] + input.length());
-	}
-
-	// returns a vector of int values for the characters in 'input'
-	// the input is expected to be "normalized"
-	static vector<int> int_values(string input) {
-		const size_t vector_size = input.length();
-		vector<int> int_vals (vector_size);
-
-		for(char ch : input)
-			int_vals.push_back(value(ch));
-
-		return int_vals;
-	}
-
 	static void pad_with_zeros(vector<int>& vec_to_pad, size_t zero_num) {
-		for(size_t i=0; i<zero_num; i++)
-			vec_to_pad.push_back(0);
+               for(size_t i=0; i<zero_num; i++)
+                       vec_to_pad.push_back(0);
 	}
 
 	// creates 1*degree matrices from the given vector of integers
@@ -81,7 +49,7 @@ namespace hill_cipher {
 		const size_t matrix_num = ceil(vals.size() / double(degree));
 
 		// 'matrix_num' vectors of size 'degree'
-		vector< vector<int> > matrices (matrix_num, vector<int>(degree));
+		vector< vector<int> > matrices (matrix_num);
 
 		// pad 'vals' with zeros in case it isn't a multiple of degree
 		const int missing_nums = vals.size() % degree;
@@ -101,6 +69,33 @@ namespace hill_cipher {
 		return matrices;
 	}
 
+	static bool is_valid(char ch) {
+		if(isalpha(ch) && isupper(ch))
+			return true;
+
+		return false;
+	}
+
+	// converts uppercase alphabet to a value in range [0, 26)
+	static int value(char ch) {
+		if(!is_valid(ch))
+			throw new std::invalid_argument("Not a valid character\n"
+							"Only uppercase alphabets are valid");
+		return (ch - 'A');
+	}
+
+	// returns a vector of int values for the characters in 'input'
+	// the input is expected to be "normalized"
+	static vector<int> int_values(string input) {
+		const size_t vector_size = input.length();
+		vector<int> int_vals (vector_size);
+
+		for(size_t i=0; i<vector_size; i++)
+			int_vals[i] = value(input[i]);
+
+		return int_vals;
+	}
+
 	// creates a 1*degree matrices from the given plain_text
 	// all characters of plaint text are expected to be "normalized"
 	static auto plain_text_matrices(string plain_text, unsigned degree) {
@@ -110,7 +105,13 @@ namespace hill_cipher {
 		return int_matrices(int_vals, degree);
 	}
 
-	string operator* (string plain_text, const cipher_matrix& matrix) {
+	// converts all character to uppercase
+	static void normalize(string& input) {
+		auto& facet = std::use_facet<std::ctype<char>>(std::locale());
+		facet.toupper(&input[0], &input[0] + input.length());
+	}
+
+	string operator* (string plain_text, const key_matrix& kmatrix) {
 		normalize(plain_text);
 		auto pt_matrices = plain_text_matrices(plain_text, kmatrix.degree);
 
