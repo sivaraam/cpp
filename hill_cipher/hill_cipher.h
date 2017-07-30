@@ -1,8 +1,8 @@
-#include <istream>
 #include <vector>
+#include <istream>
 using std::string;
-using std::istream;
 using std::vector;
+using std::istream;
 
 namespace hill_cipher {
 
