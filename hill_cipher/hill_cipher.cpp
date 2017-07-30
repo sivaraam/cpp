@@ -33,14 +33,14 @@ namespace hill_cipher {
 	// converts value in range [0,26) to the correspondinng uppercase character
 	static char value(int val) {
 		if(!is_valid(val)) {
-			throw new std::invalid_argument("Not a valid char value\n"
-							"Only values in range [0, 26) are valid");
+			throw new std::invalid_argument{"Not a valid char value\n"
+							"Only values in range [0, 26) are valid"};
 		}
 
 		return (val + reference_val);
 	}
 
-	static string partial_cipher_text(vector<int> ct_matrix) {
+	static string get_cipher_text(vector<int> ct_matrix) {
 		string partial_cipher_text;
 
 		for(int i_val : ct_matrix) {
@@ -54,15 +54,24 @@ namespace hill_cipher {
 		string cipher_text;
 
 		for(auto ct_matrix : ct_matrices) {
-			cipher_text += partial_cipher_text(ct_matrix);
+			cipher_text += get_cipher_text(ct_matrix);
 		}
 
 		return cipher_text;
 	}
 
+	// multiples the given plain text (P) matrix and the key matrix (K) as follows:
+	//
+	// 	(E * P) % total_chars
+	//
+	// i.e., values of the resultant matrix is in range [0, total_chars)
+	//
+	// Assumptions:
+	//	* kmatrix is a square matrix of order 'degree*degree'
+	//	* pt_matrix is of order '1*degree'
 	static auto mat_multiply(const vector<int>& pt_matrix, const vector< vector<int> >& kmatrix, unsigned degree) {
 		vector<int> ct_matrix (degree);
-		const int total_chars = 26;
+		const static int total_chars = 26;
 
 		for(size_t km_col=0; km_col<degree; km_col++) {
 			for(size_t inter=0; inter<degree; inter++) {
@@ -80,15 +89,15 @@ namespace hill_cipher {
 		// convert degree to double to trigger floating-point division
 		const size_t matrix_num = ceil(vals.size() / double(degree));
 
-		// 'matrix_num' vectors of size 'degree'
+		// 'matrix_num' vectors
 		vector< vector<int> > matrices (matrix_num);
 
-		for(size_t curr_matrix_index=0; curr_matrix_index < matrix_num; curr_matrix_index++) {
+		for(size_t curr_int_matrix=0; curr_int_matrix < matrix_num; curr_int_matrix++) {
 
-			for(size_t curr_val_index=0; curr_val_index < degree; curr_val_index++) {
+			for(size_t curr_int=0; curr_int < degree; curr_int++) {
 
-				size_t val_index = curr_matrix_index * degree + curr_val_index;
-				matrices[curr_matrix_index].push_back(vals[val_index]);
+				size_t val_index = curr_int_matrix * degree + curr_int;
+				matrices[curr_int_matrix].push_back(vals[val_index]);
 
 			}
 
@@ -107,8 +116,8 @@ namespace hill_cipher {
 	// converts uppercase alphabet to a value in range [0, 26)
 	static int value(char ch) {
 		if(!is_valid(ch))
-			throw new std::invalid_argument("Not a valid character\n"
-							"Only uppercase alphabets are valid");
+			throw new std::invalid_argument{"Not a valid character\n"
+							"Only uppercase alphabets are valid"};
 		return (ch - reference_val);
 	}
 
@@ -159,7 +168,7 @@ namespace hill_cipher {
 		return cipher_text(ct_matrices).substr(0, original_length);
 	}
 
-    string encrypt (string plain_text, const key_matrix& kmatrix) {
-        return plain_text * kmatrix;
-    }
+	string encrypt (string plain_text, const key_matrix& kmatrix) {
+		return plain_text * kmatrix;
+	}
 }

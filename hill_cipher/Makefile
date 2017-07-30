@@ -17,4 +17,4 @@ debug:
 
 # TODO: measure performance difference
 optimize::
-	$(gcc_compatible_compiler) -O3 $(opts) $(implementation) $(test_file)
+	$(gcc_compatible_compiler) $(opts) -O3 $(implementation) $(test_file)
