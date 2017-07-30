@@ -157,4 +157,8 @@ namespace hill_cipher {
 		// reduce the size of cipher text to the original length of plain text
 		return cipher_text(ct_matrices).substr(0, original_length);
 	}
+
+    string encrypt (string plain_text, const key_matrix& kmatrix) {
+        return plain_text * kmatrix;
+    }
 }
