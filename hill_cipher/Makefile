@@ -8,7 +8,7 @@ opts += "-Wall"
 opts += "--pedantic"
 
 all:
-	$(gcc_compatible_compiler) $(opts) -S $(dependencies) $(implementation) 
+	$(gcc_compatible_compiler) $(opts) -S $(dependencies) $(implementation)
 
 build:
 	$(gcc_compatible_compiler) $(opts) $(dependencies) $(implementation) $(test_file)
