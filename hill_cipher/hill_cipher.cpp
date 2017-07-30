@@ -39,11 +39,6 @@ namespace hill_cipher {
 		return (val + reference_val);
 	}
 
-	static void pad_with_zeros(vector<int>& vec_to_pad, size_t zero_num) {
-               for(size_t i=0; i<zero_num; i++)
-                       vec_to_pad.push_back(0);
-	}
-
 	// creates 1*degree matrices from the given vector of integers
 	static auto int_matrices(vector<int> vals, unsigned degree) {
 
@@ -52,10 +47,6 @@ namespace hill_cipher {
 
 		// 'matrix_num' vectors of size 'degree'
 		vector< vector<int> > matrices (matrix_num);
-
-		// pad 'vals' with zeros in case it isn't a multiple of degree
-		const int missing_nums = vals.size() % degree;
-		pad_with_zeros(vals, missing_nums);
 
 		for(size_t curr_matrix_index=0; curr_matrix_index < matrix_num; curr_matrix_index++) {
 
@@ -107,14 +98,20 @@ namespace hill_cipher {
 		return int_matrices(int_vals, degree);
 	}
 
-	// converts all character to uppercase
-	static void normalize(string& input) {
+	// 1. converts all character to uppercase
+	// 2. further, pad plain_text with 'reference_val' in case it's
+	//    length isn't a multiple of degree
+	static void normalize(string& input, unsigned degree) {
 		auto& facet = std::use_facet<std::ctype<char>>(std::locale());
 		facet.toupper(&input[0], &input[0] + input.length());
+
+		const int missing_nums = (degree * ceil( input.length()/double(degree) ) - input.length());;
+		for(size_t i=0; i<missing_nums; i++)
+			input += reference_val;
 	}
 
 	string operator* (string plain_text, const key_matrix& kmatrix) {
-		normalize(plain_text);
+		normalize(plain_text, kmatrix.degree);
 		auto pt_matrices = plain_text_matrices(plain_text, kmatrix.degree);
 
 
