@@ -10,18 +10,23 @@ int main() {
 	cin>>degree;
 
 	key_matrix km {degree};
-	cout<<"Enter the key matrix: \n";
-	cin>>km;
+	try {
+		cout<<"Enter the key matrix: \n";
+		cin>>km;
+	} catch (std::ios_base::failure fo) {
+		cout<<fo.what()<<std::endl;
+		exit(EXIT_FAILURE);
+	}
 
 	string plain_text;
 	cout<<"Enter the plain text: ";
 	cin>>plain_text;
 
 	try {
-		cout<<"Cipher text: "<<plain_text*km;
+		cout<<"Cipher text: "<<encrypt(plain_text, km);
 	} catch(std::invalid_argument ia) {
 		cout<<ia.what();
-		exit (EXIT_FAILURE);
+		exit(EXIT_FAILURE);
 	}
 
 }
