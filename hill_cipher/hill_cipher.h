@@ -1,8 +1,8 @@
-#include <istream>
 #include <vector>
+#include <istream>
 using std::string;
-using std::istream;
 using std::vector;
+using std::istream;
 
 namespace hill_cipher {
 
@@ -37,12 +37,12 @@ namespace hill_cipher {
 			// public method of this class; as specified in the contract.
 			friend istream& operator>> (istream& is, key_matrix& cm);
 
-			friend string operator* (string plain_text, const key_matrix& matrix);
+			friend string operator* (string plain_text, const key_matrix& kmatrix);
 	};
 
 	// Helper methods
-	// string operator* (const key_matrix& matrix, const string& plain_text);
+	// string operator* (string plain_text, const key_matrix& kmatrix);
 
 	// Wrapper for the overloaded * operator which accepts the same parameters
-	string encrypt(const key_matrix& matrix, const string& plaint_text);
+	string encrypt(string plain_text, const key_matrix& kmatrix);
 }
