@@ -20,6 +20,8 @@ namespace hill_cipher {
 	}
 
 
+	const static char reference_val = 'A';
+
 	static bool is_valid(int val) {
 		if(val>=0 && val<26)
 			return true;
@@ -34,7 +36,7 @@ namespace hill_cipher {
 							"Only values in range [0, 26) are valid");
 		}
 
-		return (val + 'A');
+		return (val + reference_val);
 	}
 
 	static void pad_with_zeros(vector<int>& vec_to_pad, size_t zero_num) {
@@ -81,7 +83,7 @@ namespace hill_cipher {
 		if(!is_valid(ch))
 			throw new std::invalid_argument("Not a valid character\n"
 							"Only uppercase alphabets are valid");
-		return (ch - 'A');
+		return (ch - reference_val);
 	}
 
 	// returns a vector of int values for the characters in 'input'
