@@ -30,7 +30,6 @@ namespace hill_cipher {
 
 			key_matrix(unsigned degree) {
 				this->degree = degree;
-				// TODO how to create multiple vectors ?
 				this->matrix = vector<vector<int>> (degree, vector<int> (degree));
 			}
 
