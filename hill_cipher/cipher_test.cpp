@@ -1,8 +1,9 @@
 #include <iostream>
 #include "hill_cipher.h"
-using hill_cipher::key_matrix;
+using std::string;
 using std::cout;
 using std::cin;
+using hill_cipher::key_matrix;
 
 int main() {
 	unsigned degree;
@@ -23,7 +24,7 @@ int main() {
 	cin>>plain_text;
 
 	try {
-		cout<<"Cipher text: "<<encrypt(plain_text, km);
+		cout<<"Cipher text: "<<encrypt(plain_text, km)<<std::endl;
 	} catch(std::invalid_argument ia) {
 		cout<<ia.what();
 		exit(EXIT_FAILURE);
