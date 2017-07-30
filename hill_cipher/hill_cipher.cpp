@@ -7,12 +7,13 @@
 namespace hill_cipher {
 
 	istream& operator>> (istream& is, key_matrix& kmatrix) {
-		// throw exception in case of failure.
-		// to halt or alter flow of program
-		is.exceptions(std::ios_base::failbit);
 		for (size_t i=0; i<kmatrix.degree; i++) {
 			for (size_t j=0; j<kmatrix.degree; j++) {
 				is>>kmatrix.matrix[i][j];
+				// throw exception in case of failure.
+				// to halt or alter flow of program
+				if(is.fail())
+					throw new std::ios_base::failure{"Failed to read the key matrix"};
 			}
 		}
 
