@@ -39,6 +39,40 @@ namespace hill_cipher {
 		return (val + reference_val);
 	}
 
+	static string partial_cipher_text(vector<int> ct_matrix) {
+		string partial_cipher_text;
+
+		for(int i_val : ct_matrix) {
+			partial_cipher_text += value(i_val);
+		}
+
+		return partial_cipher_text;
+	}
+
+	static string cipher_text(vector< vector<int> > ct_matrices) {
+		string cipher_text;
+
+		for(auto ct_matrix : ct_matrices) {
+			cipher_text += partial_cipher_text(ct_matrix);
+		}
+
+		return cipher_text;
+	}
+
+	static auto mat_multiply(const vector<int>& pt_matrix, const vector< vector<int> >& kmatrix, unsigned degree) {
+		vector<int> ct_matrix (degree);
+		const int total_chars = 26;
+
+		for(size_t km_col=0; km_col<degree; km_col++) {
+			for(size_t inter=0; inter<degree; inter++) {
+				ct_matrix[km_col] += pt_matrix[inter] * kmatrix[inter][km_col];
+			}
+			ct_matrix[km_col] %= total_chars;
+		}
+
+		return ct_matrix;
+	}
+
 	// creates 1*degree matrices from the given vector of integers
 	static auto int_matrices(vector<int> vals, unsigned degree) {
 
@@ -111,9 +145,16 @@ namespace hill_cipher {
 	}
 
 	string operator* (string plain_text, const key_matrix& kmatrix) {
+		unsigned original_length = plain_text.length();
 		normalize(plain_text, kmatrix.degree);
 		auto pt_matrices = plain_text_matrices(plain_text, kmatrix.degree);
+		vector< vector<int> > ct_matrices ;
 
+		for(auto pt_matrix : pt_matrices) {
+			ct_matrices.push_back(mat_multiply(pt_matrix, kmatrix.matrix, kmatrix.degree));
+		}
 
+		// reduce the size of cipher text to the original length of plain text
+		return cipher_text(ct_matrices).substr(0, original_length);
 	}
 }
