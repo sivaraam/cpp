@@ -7,7 +7,8 @@ opts = "-std=c++11"
 
 all:
 	# just compile the implementation
-	$(gcc_compatible_compiler) -S $(opts) $(dependency) $(implementation)
+	$(gcc_compatible_compiler $(opts) -S $(dependency) $(implementation)
+
 build:
 	$(gcc_compatible_compiler) $(opts) $(dependency) $(implementation) $(test_file)
 
