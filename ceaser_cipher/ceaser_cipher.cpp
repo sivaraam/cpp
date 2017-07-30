@@ -1,6 +1,5 @@
 #include "ceaser_cipher.h"
 
-
 namespace ceaser_cipher {
 
 	static bool is_valid(char ch) {

@@ -1,5 +1,5 @@
-#include "ceaser_cipher.h"
 #include <iostream>
+#include "ceaser_cipher.h"
 //using ceaser_cipher::WrappingWord;
 using std::string;
 using std::cout;
