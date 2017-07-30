@@ -16,34 +16,34 @@ namespace hill_cipher {
 	//	after the "successful" invocation of the overloaded input
 	//	stream operator atleast once. Else, the behaviour is "undefined".
 	// 
-	class cipher_matrix{
+	class key_matrix{
 		vector< vector<int> > matrix;
-		int degree;
+		unsigned degree;
 
 		public:
 			// delete the unwanted defaults
-			cipher_matrix() = delete;
-			cipher_matrix(cipher_matrix&& cm) = delete;
-			cipher_matrix(const cipher_matrix& cm) = delete;
-			cipher_matrix& operator= (const cipher_matrix& cm) = delete;
-			cipher_matrix& operator= (cipher_matrix&& cm) = delete;
+			key_matrix() = delete;
+			key_matrix(key_matrix&& cm) = delete;
+			key_matrix(const key_matrix& cm) = delete;
+			key_matrix& operator= (const key_matrix& cm) = delete;
+			key_matrix& operator= (key_matrix&& cm) = delete;
 
-			cipher_matrix(int degree) {
+			key_matrix(unsigned degree) {
 				this->degree = degree;
 				// TODO how to create multiple vectors ?
-				this->matrix = vector<vector<int>> { vector<int> { degree } };
+				this->matrix = vector<vector<int>> (degree, vector<int> (degree));
 			}
 
 			// The function which should be invoked before any other
 			// public method of this class; as specified in the contract.
-			friend istream& operator>> (istream& is, cipher_matrix& cm);
+			friend istream& operator>> (istream& is, key_matrix& cm);
 
-			friend string operator* (string plain_text, const cipher_matrix& matrix);
+			friend string operator* (string plain_text, const key_matrix& matrix);
 	};
 
 	// Helper methods
-	// string operator* (const cipher_matrix& matrix, const string& plain_text);
+	// string operator* (const key_matrix& matrix, const string& plain_text);
 
 	// Wrapper for the overloaded * operator which accepts the same parameters
-	string encrypt(const cipher_matrix& matrix, const string& plaint_text);
+	string encrypt(const key_matrix& matrix, const string& plaint_text);
 }

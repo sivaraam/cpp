@@ -6,13 +6,13 @@
 
 namespace hill_cipher {
 
-	istream& operator>> (istream& is, cipher_matrix& cmatrix) {
+	istream& operator>> (istream& is, key_matrix& kmatrix) {
 		// throw exception in case of failure.
 		// to halt or alter flow of program
 		is.exceptions(std::ios_base::failbit);
-		for (size_t i=0; i<cmatrix.degree; i++) {
-			for (size_t j=0; j<cmatrix.degree; j++) {
-				is>>cmatrix.matrix[i][j];
+		for (size_t i=0; i<kmatrix.degree; i++) {
+			for (size_t j=0; j<kmatrix.degree; j++) {
+				is>>kmatrix.matrix[i][j];
 			}
 		}
 
@@ -26,7 +26,7 @@ namespace hill_cipher {
 		return false;
 	}
 
-	// converts uppercase alphabet to a value iin range [0, 26)
+	// converts uppercase alphabet to a value in range [0, 26)
 	static int value(char ch) {
 		if(!is_valid(ch))
 			throw new std::invalid_argument("Not a valid character\n"
@@ -112,7 +112,7 @@ namespace hill_cipher {
 
 	string operator* (string plain_text, const cipher_matrix& matrix) {
 		normalize(plain_text);
-		auto pt_matrices = plain_text_matrices(plain_text, matrix.degree);
+		auto pt_matrices = plain_text_matrices(plain_text, kmatrix.degree);
 
 
 	}
