@@ -1,11 +1,11 @@
-#include "playfiar_cipher.h"
+#include "playfair_cipher.h"
 #include "playfair_cipher_helpers.h"
 
 namespace playfair_cipher {
 
 	const string alphabets { "ABCDEFGHIJKLMNOPQRSTUVWXYZ" };
 
-	void playfair_table::initialize_table(const string key) {
+	void playfair_table::initialize_table(string key) {
 
 		// remove duplicate chars
 		normalize(key);
@@ -32,13 +32,14 @@ namespace playfair_cipher {
 				}
 			}
 		}
+	
 	}
 
-	playfair_table::playfair_table(const string key) : table(table_degree, vector(table_degree)) {
+	playfair_table::playfair_table(const string key) : table(table_degree, vector<char>(table_degree)) {
 		initialize_table(key);
 	}
 
-	string encrypt(const string plain_text, const string key) {
+	string encrypt(string plain_text, string key) {
 		playfair_table ptable { key };
 		vector< tuple<char, char> > ct_tuples;
 		bool normalized = normalize(plain_text);

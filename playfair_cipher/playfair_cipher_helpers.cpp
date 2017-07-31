@@ -8,7 +8,7 @@ namespace playfair_cipher {
 	bool normalize(string& text) {
 		const static char dummy = 'A';
 		if( (text.length() % 2) != 0 ) {
-			text.append(dummy);
+			text.push_back(dummy);
 			return true;
 		}
 		return false;
@@ -18,7 +18,7 @@ namespace playfair_cipher {
 	vector< tuple<char, char> > get_plain_text_tuples(const string plain_text) {
 		vector< tuple<char, char> > pt_tuples;
 
-		for(size_t ch_index; ch_index < plain_text.length(); ch_index += 2) {
+		for(size_t ch_index = 0; ch_index < plain_text.length(); ch_index += 2) {
 			pt_tuples.push_back( std::make_tuple(plain_text[ch_index], plain_text[ch_index+1]) );
 		}
 

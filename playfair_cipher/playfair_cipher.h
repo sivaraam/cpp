@@ -9,7 +9,7 @@ namespace playfair_cipher {
 	class playfair_table {
 
 		// the table itself
-		const vector< vector<char> > table;
+		vector< vector<char> > table;
 		const static size_t table_degree = 5;
 
 		// the state of this object is not defined after
@@ -17,7 +17,7 @@ namespace playfair_cipher {
 		static string alphabets;	
 	
 		// used to initalize the table's contents
-		void initialize_table();
+		void initialize_table(string key);
 
 		public:
 			// delete the unnecessary defaults
