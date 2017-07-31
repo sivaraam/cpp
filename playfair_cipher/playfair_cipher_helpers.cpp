@@ -1,10 +1,8 @@
+#include <algorithm>
 #include "playfair_cipher_helpers.h"
 
 namespace playfair_cipher {
 
-	// in case the length isn't a multiple of 2
-	// add a dummy character to make it so
-	// returns 'true' if normalization was done
 	bool normalize(string& text) {
 		const static char dummy = 'A';
 		if( (text.length() % 2) != 0 ) {
@@ -12,6 +10,20 @@ namespace playfair_cipher {
 			return true;
 		}
 		return false;
+	}
+
+	void normalize(string& key, size_t max_length) {
+		string temp = key;
+		std::string::iterator iter = key.begin();
+
+		// for every character in key located at 'loc' tests if there are any such
+		// character in range [begin, loc) and if there is the corresponding character
+		// is not copied
+		std::copy_if(key.begin(), key.end(), temp.begin(),
+			     [&](char c) { return !std::count(key.begin(), iter++, c); });
+
+		key = temp;
+		key.resize(max_length);
 	}
 
 	// the string's length must be an order of 2
