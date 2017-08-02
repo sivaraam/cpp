@@ -1,15 +1,18 @@
 #include <string>
 #include <vector>
+#include <utility>
+#include <boost/numeric/mtl/mtl.hpp>
 
 using std::vector;
 using std::string;
+using std::pair;
 
 namespace playfair_cipher {
 
 	class playfair_table {
 
 		// the table itself
-		vector< vector<char> > table;
+		mtl::dense2D<char> table;
 		const static size_t table_degree = 5;
 
 		// the state of this object is not defined after
