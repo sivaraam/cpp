@@ -89,12 +89,15 @@ namespace playfair_cipher {
 	string encrypt(string plain_text, string key) {
 		playfair_table ptable { key };
 		vector< pair<char, char> > ct_pairs;
-		bool normalized = normalize(plain_text);
+
+		// TODO detect repeated characters and inject 'null' character
+		normalize(plain_text);
+
 		auto pt_pairs = get_plain_text_pairs(plain_text);
 
 		for(auto pt_pair : pt_pairs)
 			ct_pairs.push_back(ptable[pt_pair]);
 
-		return cipher_text(ct_pairs, normalized);
+		return cipher_text(ct_pairs);
 	}
 }

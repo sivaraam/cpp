@@ -7,11 +7,10 @@ using std::string;
 
 namespace playfair_cipher {
 
+	// convert all chars to uppercase
 	// in case the length of string isn't a multiple of 2
 	// add a dummy character to make it so
-	//
-	// returns 'true' if normalization was done
-	bool normalize(string& str);
+	void normalize(string& str);
 
 	// remove duplicate chars and ensure it
 	// contains no more than 'max_size' chars

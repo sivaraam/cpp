@@ -1,15 +1,18 @@
+#include <locale>
 #include <algorithm>
 #include "playfair_cipher_helpers.h"
 
 namespace playfair_cipher {
 
-	bool normalize(string& text) {
+	void normalize(string& text) {
+		// capitablize the characters
+		auto& facet = std::use_facet<std::ctype<char>>(std::locale());
+		facet.toupper(&text[0], &text[0] + text.length());
+
 		const static char dummy = 'A';
 		if( (text.length() % 2) != 0 ) {
 			text.push_back(dummy);
-			return true;
 		}
-		return false;
 	}
 
 	void normalize(string& key, size_t max_length) {
