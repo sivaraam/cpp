@@ -39,4 +39,16 @@ namespace playfair_cipher {
 
 		return pt_pairs;
 	}
+
+	string cipher_text(vector< pair<char, char> > ct_pairs) {
+		string cipher_text;
+
+		for(auto ct_pair : ct_pairs) {
+			auto [first_cipher_ch, second_cipher_ch] = ct_pair;
+			cipher_text += first_cipher_ch;
+			cipher_text += second_cipher_ch;
+		}
+
+		return cipher_text;
+	}
 }
