@@ -27,13 +27,13 @@ namespace playfair_cipher {
 	}
 
 	// the string's length must be an order of 2
-	vector< tuple<char, char> > get_plain_text_tuples(const string plain_text) {
-		vector< tuple<char, char> > pt_tuples;
+	vector< pair<char, char> > get_plain_text_pairs(const string plain_text) {
+		vector< pair<char, char> > pt_pairs;
 
 		for(size_t ch_index = 0; ch_index < plain_text.length(); ch_index += 2) {
-			pt_tuples.push_back( std::make_tuple(plain_text[ch_index], plain_text[ch_index+1]) );
+			pt_pairs.push_back( std::make_pair(plain_text[ch_index], plain_text[ch_index+1]) );
 		}
 
-		return pt_tuples;
+		return pt_pairs;
 	}
 }

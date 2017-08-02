@@ -44,13 +44,13 @@ namespace playfair_cipher {
 
 	string encrypt(string plain_text, string key) {
 		playfair_table ptable { key };
-		vector< tuple<char, char> > ct_tuples;
+		vector< pair<char, char> > ct_pairs;
 		bool normalized = normalize(plain_text);
-		auto pt_tuples = get_plain_text_tuples(plain_text);
+		auto pt_pairs = get_plain_text_pairs(plain_text);
 
-		for(auto pt_tuple : pt_tuples)
-			ct_tuples.push_back(ptable(pt_tuple));
+		for(auto pt_pair : pt_pairs)
+			ct_pairs.push_back(ptable[pt_pair]);
 
-		return cipher_text(ct_tuples, normalized);
+		return cipher_text(ct_pairs, normalized);
 	}
 }

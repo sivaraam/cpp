@@ -1,8 +1,8 @@
 #include <vector>
-#include <tuple>
 #include <string>
+#include <utility>
 using std::vector;
-using std::tuple;
+using std::pair;
 using std::string;
 
 namespace playfair_cipher {
@@ -17,6 +17,6 @@ namespace playfair_cipher {
 	// contains no more than 'max_size' chars
 	void normalize(string& str, size_t max_size);
 
-	vector< tuple<char, char> > get_plain_text_tuples(const string plain_text);
+	vector< pair<char, char> > get_plain_text_pairs(const string plain_text);
 
 }
