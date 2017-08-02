@@ -3,11 +3,12 @@
 
 namespace playfair_cipher {
 
-	const string alphabets { "ABCDEFGHIJKLMNOPQRSTUVWXYZ" };
+	const string playfair_table::alphabets { "ABCDEFGHIJKLMNOPQRSTUVWXYZ" };
 
 	void playfair_table::initialize_table(string key) {
 
 		normalize(key, table_degree*table_degree);
+		string alphabets_copy {alphabets};
 
 		// fill table row(s) using given key
 		size_t curr_row = 0, curr_col = 0;
@@ -15,7 +16,7 @@ namespace playfair_cipher {
 			table[curr_row][curr_col] = key_ch;
 
 			// should have erased at least and at most one character
-			alphabets.erase(alphabets.find(key_ch));
+			alphabets_copy.erase(alphabets_copy.find(key_ch));
 
 			curr_col++;
 			if(curr_col == table_degree) {
@@ -26,13 +27,13 @@ namespace playfair_cipher {
 
 		// alphabet would consist of characters enough
 		// to fill the rest of the table
-		size_t alphabets_index = 0;
+		size_t alphabets_copy_index = 0;
 		// fill remaining cells with the rest of the alpabets
 		// leave the last alphabet that wasn't added to the table
 		// to be handled by the accessor implementation
 		for(; curr_row < table_degree; curr_row++) {
 			for(; curr_col < table_degree; curr_col++) {
-				table[curr_row][curr_col] = alphabets[alphabets_index++];
+				table[curr_row][curr_col] = alphabets_copy[alphabets_copy_index++];
 			}
 		}
 	

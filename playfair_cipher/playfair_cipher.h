@@ -14,10 +14,7 @@ namespace playfair_cipher {
 		// the table itself
 		mtl::dense2D<char> table;
 		const static size_t table_degree = 5;
-
-		// the state of this object is not defined after
-		// the invocation of initialize_table
-		static string alphabets;	
+		const static string alphabets;
 
 		// used to initalize the table's contents
 		void initialize_table(string key);
