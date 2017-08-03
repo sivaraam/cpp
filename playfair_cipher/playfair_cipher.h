@@ -1,8 +1,10 @@
 #include <string>
 #include <vector>
+#include <utility>
 
 using std::vector;
 using std::string;
+using std::pair;
 
 namespace playfair_cipher {
 

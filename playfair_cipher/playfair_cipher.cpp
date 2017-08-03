@@ -1,3 +1,4 @@
+#include <stdexcept>
 #include "playfair_cipher.h"
 #include "playfair_cipher_helpers.h"
 
@@ -89,7 +90,7 @@ namespace playfair_cipher {
 			return std::make_pair(missing_alph_row, missing_alph_col);
 
 		// control should not reach here if the entry is valid
-		throw std::invalid_argument{"character not in table"};
+		throw std::invalid_argument {"character not in table"};
 	}
 
 	pair<char, char> playfair_matrix::operator() (pair<char, char> pt_pair, bool decrypt) {
