@@ -3,9 +3,9 @@
 
 namespace playfair_cipher {
 
-	const string playfair_table::alphabets { "ABCDEFGHIJKLMNOPQRSTUVWXYZ" };
+	const string playfair_matrix::alphabets { "ABCDEFGHIJKLMNOPQRSTUVWXYZ" };
 
-	void playfair_table::initialize_table(string key) {
+	void playfair_matrix::initialize_table(string key) {
 
 		string alphabets_copy {alphabets};
 
@@ -39,17 +39,17 @@ namespace playfair_cipher {
 	
 	}
 
-	playfair_table::playfair_table(const string key) : table (common_degree, common_degree) {
+	playfair_matrix::playfair_matrix(const string key) : table (common_degree, common_degree) {
 		initialize_table(key);
 	}
 
-	pair<char, char> get_cipher_pair(playfair_table *ptable, pair<size_t, size_t> first_index, pair<size_t, size_t>second_index) {
+	pair<char, char> get_cipher_pair(playfair_matrix *ptable, pair<size_t, size_t> first_index, pair<size_t, size_t>second_index) {
 		auto [first_row, first_col] = first_index;
 		auto [first_cipher_row, first_cipher_col] = first_index;
 		auto [second_row, second_col] = second_index;
 		auto [second_cipher_row, second_cipher_col] = second_index;
 
-		const static size_t degree = playfair_table::common_degree;
+		const static size_t degree = playfair_matrix::common_degree;
 
 		if (first_row == second_row) {
 			first_cipher_col = (first_col + 1) % degree;
@@ -70,7 +70,7 @@ namespace playfair_cipher {
 		return std::make_pair(first_cipher_char, second_cipher_char);
 	}
 
-	pair<size_t, size_t> playfair_table::get_index(char ch) {
+	pair<size_t, size_t> playfair_matrix::get_index(char ch) {
 		for(size_t row=0; row<common_degree; row++) {
 			for(size_t col=0; col<common_degree; col++) {
 				if(table[row][col] == ch)
@@ -89,7 +89,7 @@ namespace playfair_cipher {
 		throw std::invalid_argument{"character not in table"};
 	}
 
-	pair<char, char> playfair_table::operator[] (pair<char, char> pt_pair) {
+	pair<char, char> playfair_matrix::operator[] (pair<char, char> pt_pair) {
 		const auto [first_ch, second_ch] = pt_pair;
 		auto first_index = get_index(first_ch);
 		auto second_index = get_index(second_ch);
@@ -100,10 +100,10 @@ namespace playfair_cipher {
 	string encrypt(string plain_text, string key) {
 		normalize(plain_text);
 
-		static const auto degree = playfair_table::common_degree;
+		static const auto degree = playfair_matrix::common_degree;
 		normalize(key, degree*degree);
 
-		playfair_table ptable { key };
+		playfair_matrix ptable { key };
 		vector< pair<char, char> > ct_pairs;
 
 		auto pt_pairs = get_plain_text_pairs(plain_text);
