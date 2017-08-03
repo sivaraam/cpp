@@ -12,6 +12,7 @@ namespace playfair_cipher {
 
 	void normalize(string& text) {
 		capitalize(text);
+
 		const static char dummy = 'A';
 		if( (text.length() % 2) != 0 ) {
 			text.push_back(dummy);
@@ -19,17 +20,19 @@ namespace playfair_cipher {
 	}
 
 	void normalize(string& key, size_t max_length) {
-		capitalize(key);
-		string temp;
-		std::string::iterator iter = key.begin();
+		string temp { key };
+		key.clear();
+		
+		capitalize(temp);
 
+		// Ensure key contains no duplicate characters
+		std::string::iterator iter = temp.begin();
 		// for every character in key located at 'loc' tests if there are any such
 		// character in range [begin, loc) and if there is the corresponding character
 		// is not copied
-		std::copy_if(key.begin(), key.end(), std::back_inserter(temp),
-			     [&](char c) { return !std::count(key.begin(), iter++, c); });
+		std::copy_if(temp.begin(), temp.end(), std::back_inserter(key),
+			     [&](char c) { return !std::count(temp.begin(), iter++, c); });
 
-		key = temp;
 		key.resize(max_length);
 	}
 
