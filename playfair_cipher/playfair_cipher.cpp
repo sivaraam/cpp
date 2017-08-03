@@ -7,7 +7,7 @@ namespace playfair_cipher {
 
 	void playfair_table::initialize_table(string key) {
 
-		normalize(key, table_degree*table_degree);
+		normalize(key, common_degree*common_degree);
 		string alphabets_copy {alphabets};
 
 		// fill table row(s) using given key
@@ -19,7 +19,7 @@ namespace playfair_cipher {
 			alphabets_copy.erase(alphabets_copy.find(key_ch));
 
 			curr_col++;
-			if(curr_col == table_degree) {
+			if(curr_col == common_degree) {
 				curr_col = 0;
 				curr_row++;
 			}
@@ -31,15 +31,15 @@ namespace playfair_cipher {
 		// fill remaining cells with the rest of the alpabets
 		// leave the last alphabet that wasn't added to the table
 		// to be handled by the accessor implementation
-		for(; curr_row < table_degree; curr_row++) {
-			for(; curr_col < table_degree; curr_col++) {
+		for(; curr_row < common_degree; curr_row++) {
+			for(; curr_col < common_degree; curr_col++) {
 				table[curr_row][curr_col] = alphabets_copy[alphabets_copy_index++];
 			}
 		}
 	
 	}
 
-	playfair_table::playfair_table(const string key) : table (table_degree, table_degree) {
+	playfair_table::playfair_table(const string key) : table (common_degree, common_degree) {
 		initialize_table(key);
 	}
 
@@ -50,12 +50,12 @@ namespace playfair_cipher {
 		auto [second_cipher_row, second_cipher_col] = second_index;
 
 		if (first_row == second_row) {
-			first_cipher_col = (first_col + 1) % playfair_table::table_degree;
-			second_cipher_col = (second_col + 1) % playfair_table::table_degree;
+			first_cipher_col = (first_col + 1) % playfair_table::common_degree;
+			second_cipher_col = (second_col + 1) % playfair_table::common_degree;
 		}
 		else if (first_col == second_col) {
-			first_cipher_row = (first_row + 1) % playfair_table::table_degree;
-			second_cipher_row = (second_row + 1) % playfair_table::table_degree;
+			first_cipher_row = (first_row + 1) % playfair_table::common_degree;
+			second_cipher_row = (second_row + 1) % playfair_table::common_degree;
 		}
 		else {
 			first_cipher_col = second_col;
@@ -68,8 +68,8 @@ namespace playfair_cipher {
 	}
 
 	pair<size_t, size_t> playfair_table::get_index(char ch) {
-		for(size_t row=0; row<table_degree; row++) {
-			for(size_t col=0; col<table_degree; col++) {
+		for(size_t row=0; row<common_degree; row++) {
+			for(size_t col=0; col<common_degree; col++) {
 				if(table[row][col] == ch)
 					return std::make_pair(row, col);
 			}

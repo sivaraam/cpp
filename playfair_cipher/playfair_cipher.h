@@ -11,10 +11,11 @@ namespace playfair_cipher {
 
 	class playfair_table {
 
+		const static size_t common_degree = 5;
+		const static string alphabets;
+
 		// the table itself
 		mtl::dense2D<char> table;
-		const static size_t table_degree = 5;
-		const static string alphabets;
 
 		// used to initalize the table's contents
 		void initialize_table(string key);
