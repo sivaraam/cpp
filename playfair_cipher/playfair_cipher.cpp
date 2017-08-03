@@ -39,7 +39,7 @@ namespace playfair_cipher {
 	
 	}
 
-	playfair_matrix::playfair_matrix(const string key) : table (common_degree, common_degree) {
+	playfair_matrix::playfair_matrix(const string key) : table(common_degree, vector<char>(common_degree)) {
 		initialize_table(key);
 	}
 

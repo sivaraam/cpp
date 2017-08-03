@@ -1,11 +1,8 @@
 #include <string>
 #include <vector>
-#include <utility>
-#include <boost/numeric/mtl/mtl.hpp>
 
 using std::vector;
 using std::string;
-using std::pair;
 
 namespace playfair_cipher {
 
@@ -14,7 +11,7 @@ namespace playfair_cipher {
 		const static string alphabets;
 
 		// the table itself
-		mtl::dense2D<char> table;
+		vector< vector<char> > table;
 
 		// used to initalize the table's contents
 		void initialize_table(string key);
