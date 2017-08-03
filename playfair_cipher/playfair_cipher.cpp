@@ -38,7 +38,7 @@ namespace playfair_cipher {
 	
 	}
 
-	playfair_table::playfair_table(const string key) : table(table_degree, vector<char>(table_degree)) {
+	playfair_table::playfair_table(const string key) : table (table_degree, table_degree) {
 		initialize_table(key);
 	}
 
