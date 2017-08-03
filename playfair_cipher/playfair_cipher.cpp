@@ -7,7 +7,6 @@ namespace playfair_cipher {
 
 	void playfair_table::initialize_table(string key) {
 
-		normalize(key, common_degree*common_degree);
 		string alphabets_copy {alphabets};
 
 		// fill table row(s) using given key
@@ -88,11 +87,13 @@ namespace playfair_cipher {
 	}
 
 	string encrypt(string plain_text, string key) {
-		playfair_table ptable { key };
-		vector< pair<char, char> > ct_pairs;
-
 		// TODO detect repeated characters and inject 'null' character
 		normalize(plain_text);
+		auto degree = playfair_table::common_degree;
+		normalize(key, degree*degree);
+
+		playfair_table ptable { key };
+		vector< pair<char, char> > ct_pairs;
 
 		auto pt_pairs = get_plain_text_pairs(plain_text);
 
