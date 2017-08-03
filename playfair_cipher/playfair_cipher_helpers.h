@@ -16,7 +16,7 @@ namespace playfair_cipher {
 	// contains no more than 'max_size' chars
 	void normalize(string& str, size_t max_size);
 
-	vector< pair<char, char> > get_plain_text_pairs(const string plain_text);
+	vector< pair<char, char> > get_text_pairs(const string text);
 
 	string cipher_text(vector< pair<char, char> > cipher_char_pairs);
 

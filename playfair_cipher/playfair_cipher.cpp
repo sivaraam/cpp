@@ -100,8 +100,8 @@ namespace playfair_cipher {
 		return get_cipher_pair(this, first_index, second_index, decrypt);
 	}
 
-	string encrypt(string plain_text, string key) {
-		normalize(plain_text);
+	string transform(string text, string key, bool decrypt) {
+		normalize(text);
 
 		static const auto degree = playfair_matrix::common_degree;
 		normalize(key, degree*degree);
@@ -109,11 +109,19 @@ namespace playfair_cipher {
 		playfair_matrix ptable { key };
 		vector< pair<char, char> > ct_pairs;
 
-		auto pt_pairs = get_plain_text_pairs(plain_text);
+		auto pt_pairs = get_text_pairs(text);
 
 		for(auto pt_pair : pt_pairs)
-			ct_pairs.push_back(ptable(pt_pair));
+			ct_pairs.push_back(ptable(pt_pair, decrypt));
 
 		return cipher_text(ct_pairs);
+	}
+
+	string encrypt(string plain_text, string key) {
+		return transform(plain_text, key, false);
+	}
+
+	string decrypt(string cipher_text, string key) {
+		return transform(cipher_text, key, true);
 	}
 }
