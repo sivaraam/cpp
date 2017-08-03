@@ -34,6 +34,7 @@ namespace playfair_cipher {
 			for(; curr_col < common_degree; curr_col++) {
 				table[curr_row][curr_col] = alphabets_copy[alphabets_copy_index++];
 			}
+			curr_col=0;
 		}
 	
 	}
