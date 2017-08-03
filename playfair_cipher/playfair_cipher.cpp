@@ -89,12 +89,12 @@ namespace playfair_cipher {
 		throw std::invalid_argument{"character not in table"};
 	}
 
-	pair<char, char> playfair_matrix::operator[] (pair<char, char> pt_pair) {
+	pair<char, char> playfair_matrix::operator() (pair<char, char> pt_pair, bool decrypt) {
 		const auto [first_ch, second_ch] = pt_pair;
 		auto first_index = get_index(first_ch);
 		auto second_index = get_index(second_ch);
 
-		return get_cipher_pair(this, first_index, second_index);
+		return get_cipher_pair(this, first_index, second_index, decrypt);
 	}
 
 	string encrypt(string plain_text, string key) {
@@ -109,7 +109,7 @@ namespace playfair_cipher {
 		auto pt_pairs = get_plain_text_pairs(plain_text);
 
 		for(auto pt_pair : pt_pairs)
-			ct_pairs.push_back(ptable[pt_pair]);
+			ct_pairs.push_back(ptable(pt_pair));
 
 		return cipher_text(ct_pairs);
 	}
