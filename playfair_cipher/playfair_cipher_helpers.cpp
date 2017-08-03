@@ -83,4 +83,15 @@ namespace playfair_cipher {
 
 		return cipher_text;
 	}
+
+	int floor_mod(int dividend, int divisor) {
+		//you can check for divisor == 0 separately and do what you want
+		if(divisor < 0)
+			return floor_mod(dividend, -divisor);
+
+		int ret = dividend % divisor;
+		if(ret < 0)
+			ret+=divisor;
+		return ret;
+	}
 }

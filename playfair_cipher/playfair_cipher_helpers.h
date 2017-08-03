@@ -19,4 +19,6 @@ namespace playfair_cipher {
 	vector< pair<char, char> > get_plain_text_pairs(const string plain_text);
 
 	string cipher_text(vector< pair<char, char> > cipher_char_pairs);
+
+	int floor_mod(int dividend, int divisor);
 }

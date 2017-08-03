@@ -55,12 +55,12 @@ namespace playfair_cipher {
 		const static size_t degree = playfair_matrix::common_degree;
 
 		if (first_row == second_row) {
-			first_cipher_col = (first_col + offset) % degree;
-			second_cipher_col = (second_col + offset) % degree;
+			first_cipher_col = floor_mod((first_col + offset), degree);
+			second_cipher_col = floor_mod((second_col + offset), degree);
 		}
 		else if (first_col == second_col) {
-			first_cipher_row = (first_row + offset) % degree;
-			second_cipher_row = (second_row + offset) % degree;
+			first_cipher_row = floor_mod((first_row + offset), degree);
+			second_cipher_row = floor_mod((second_row + offset), degree);
 		}
 		else {
 			first_cipher_col = second_col;
