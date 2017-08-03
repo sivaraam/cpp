@@ -11,7 +11,6 @@ namespace playfair_cipher {
 
 	class playfair_table {
 
-		const static size_t common_degree = 5;
 		const static string alphabets;
 
 		// the table itself
@@ -25,6 +24,8 @@ namespace playfair_cipher {
 		pair<size_t, size_t> get_index(char ch);
 
 		public:
+			const static size_t common_degree = 5;
+
 			// delete the unnecessary defaults
 			playfair_table() = delete;
 			playfair_table(const playfair_table&) = delete;
