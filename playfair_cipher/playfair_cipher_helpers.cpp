@@ -55,6 +55,7 @@ namespace playfair_cipher {
 			auto [first_cipher_ch, second_cipher_ch] = ct_pair;
 			cipher_text += first_cipher_ch;
 			cipher_text += second_cipher_ch;
+			cipher_text += " ";
 		}
 
 		return cipher_text;
