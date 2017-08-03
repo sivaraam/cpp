@@ -1,4 +1,3 @@
-#include <locale>
 #include <algorithm>
 #include "playfair_cipher_helpers.h"
 
@@ -6,16 +5,16 @@ namespace playfair_cipher {
 
 	static void capitalize(string& str) {
 		// capitablize the characters
-		auto& facet = std::use_facet<std::ctype<char>>(std::locale());
-		facet.toupper(&str[0], &str[0] + str.length());
+		std::transform(str.begin(), str.end(), str.begin(),
+				[](unsigned char c) { return std::toupper(c); });
 	}
 
 	static void strip_spaces(string& str) {
 		string temp { str };
 		str.clear();
 
-		std::copy_if(temp.begin(), temp.end(), std::back_inserter(str),
-				[](char ch) { return !isspace(ch); });
+		std::remove_copy_if(temp.begin(), temp.end(), std::back_inserter(str),
+				[](char ch) { return isspace(ch); });
 	}
 
 	void normalize(string& text) {
