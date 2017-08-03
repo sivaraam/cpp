@@ -10,7 +10,16 @@ namespace playfair_cipher {
 		facet.toupper(&str[0], &str[0] + str.length());
 	}
 
+	static void strip_spaces(string& str) {
+		string temp { str };
+		str.clear();
+
+		std::copy_if(temp.begin(), temp.end(), std::back_inserter(str),
+				[](char ch) { return !isspace(ch); });
+	}
+
 	void normalize(string& text) {
+		strip_spaces(text);
 		capitalize(text);
 
 		const static char dummy = 'A';
@@ -23,6 +32,7 @@ namespace playfair_cipher {
 		string temp { key };
 		key.clear();
 		
+		strip_spaces(temp);
 		capitalize(temp);
 
 		// Ensure key contains no duplicate characters
