@@ -48,13 +48,15 @@ namespace playfair_cipher {
 		auto [second_row, second_col] = second_index;
 		auto [second_cipher_row, second_cipher_col] = second_index;
 
+		const static size_t degree = playfair_table::common_degree;
+
 		if (first_row == second_row) {
-			first_cipher_col = (first_col + 1) % playfair_table::common_degree;
-			second_cipher_col = (second_col + 1) % playfair_table::common_degree;
+			first_cipher_col = (first_col + 1) % degree;
+			second_cipher_col = (second_col + 1) % degree;
 		}
 		else if (first_col == second_col) {
-			first_cipher_row = (first_row + 1) % playfair_table::common_degree;
-			second_cipher_row = (second_row + 1) % playfair_table::common_degree;
+			first_cipher_row = (first_row + 1) % degree;
+			second_cipher_row = (second_row + 1) % degree;
 		}
 		else {
 			first_cipher_col = second_col;
@@ -63,6 +65,7 @@ namespace playfair_cipher {
 
 		const char first_cipher_char = ptable->table[first_cipher_row][first_cipher_col];
 		const char second_cipher_char = ptable->table[second_cipher_row][second_cipher_col];
+
 		return std::make_pair(first_cipher_char, second_cipher_char);
 	}
 
@@ -90,7 +93,7 @@ namespace playfair_cipher {
 		// TODO detect repeated characters and inject 'null' character
 		normalize(plain_text);
 
-		auto degree = playfair_table::common_degree;
+		static const auto degree = playfair_table::common_degree;
 		normalize(key, degree*degree);
 
 		playfair_table ptable { key };
