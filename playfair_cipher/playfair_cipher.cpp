@@ -98,7 +98,6 @@ namespace playfair_cipher {
 	}
 
 	string encrypt(string plain_text, string key) {
-		// TODO detect repeated characters and inject 'null' character
 		normalize(plain_text);
 
 		static const auto degree = playfair_table::common_degree;

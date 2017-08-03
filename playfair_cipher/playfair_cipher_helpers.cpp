@@ -21,7 +21,21 @@ namespace playfair_cipher {
 		strip_spaces(text);
 		capitalize(text);
 
-		const static char dummy = 'A';
+		const static char dummy = 'X';
+
+		// in case of duplicate characters insert 'dummy'
+		auto start = text.begin();
+		do {
+			auto adjacent_pos = std::adjacent_find(start, text.end());
+			if(adjacent_pos != text.end()) {
+				text.insert(adjacent_pos+1, dummy);
+				start = adjacent_pos + 2;
+			} else {
+				break;
+			}
+		} while(true);
+
+		// in case length is not even append a 'dummy'
 		if( (text.length() % 2) != 0 ) {
 			text.push_back(dummy);
 		}
