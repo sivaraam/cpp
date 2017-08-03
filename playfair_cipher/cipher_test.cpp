@@ -13,5 +13,9 @@ int main() {
 	cout<<"Enter the plain text: ";
 	cin>>plain_text;
 
-	cout<<"Cipher Digrams: "<<playfair_cipher::encrypt(plain_text, key)<<std::endl;
+	string cipher_text = playfair_cipher::encrypt(plain_text, key);
+
+	cout<<"Cipher Digrams: "<<cipher_text<<std::endl;
+	cout<<"Plain text digrams: "<<playfair_cipher::decrypt(cipher_text, key)<<std::endl;
+
 }

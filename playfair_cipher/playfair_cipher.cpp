@@ -1,11 +1,12 @@
+#include <stdexcept>
 #include "playfair_cipher.h"
 #include "playfair_cipher_helpers.h"
 
 namespace playfair_cipher {
 
-	const string playfair_table::alphabets { "ABCDEFGHIJKLMNOPQRSTUVWXYZ" };
+	const string playfair_matrix::alphabets { "ABCDEFGHIJKLMNOPQRSTUVWXYZ" };
 
-	void playfair_table::initialize_table(string key) {
+	void playfair_matrix::initialize_table(string key) {
 
 		string alphabets_copy {alphabets};
 
@@ -39,25 +40,28 @@ namespace playfair_cipher {
 	
 	}
 
-	playfair_table::playfair_table(const string key) : table (common_degree, common_degree) {
+	playfair_matrix::playfair_matrix(const string key) : table(common_degree, vector<char>(common_degree)) {
 		initialize_table(key);
 	}
 
-	pair<char, char> get_cipher_pair(playfair_table *ptable, pair<size_t, size_t> first_index, pair<size_t, size_t>second_index) {
+	pair<char, char> get_cipher_pair(playfair_matrix *ptable, pair<size_t, size_t> first_index, pair<size_t, size_t>second_index, bool decrypt) {
 		auto [first_row, first_col] = first_index;
 		auto [first_cipher_row, first_cipher_col] = first_index;
 		auto [second_row, second_col] = second_index;
 		auto [second_cipher_row, second_cipher_col] = second_index;
 
-		const static size_t degree = playfair_table::common_degree;
+		const static int choose_up_offset = -1;
+		const static int choose_down_offset = 1;
+		const int offset = (decrypt) ? choose_up_offset : choose_down_offset;
+		const static size_t degree = playfair_matrix::common_degree;
 
 		if (first_row == second_row) {
-			first_cipher_col = (first_col + 1) % degree;
-			second_cipher_col = (second_col + 1) % degree;
+			first_cipher_col = floor_mod((first_col + offset), degree);
+			second_cipher_col = floor_mod((second_col + offset), degree);
 		}
 		else if (first_col == second_col) {
-			first_cipher_row = (first_row + 1) % degree;
-			second_cipher_row = (second_row + 1) % degree;
+			first_cipher_row = floor_mod((first_row + offset), degree);
+			second_cipher_row = floor_mod((second_row + offset), degree);
 		}
 		else {
 			first_cipher_col = second_col;
@@ -70,7 +74,7 @@ namespace playfair_cipher {
 		return std::make_pair(first_cipher_char, second_cipher_char);
 	}
 
-	pair<size_t, size_t> playfair_table::get_index(char ch) {
+	pair<size_t, size_t> playfair_matrix::get_index(char ch) {
 		for(size_t row=0; row<common_degree; row++) {
 			for(size_t col=0; col<common_degree; col++) {
 				if(table[row][col] == ch)
@@ -86,31 +90,39 @@ namespace playfair_cipher {
 			return std::make_pair(missing_alph_row, missing_alph_col);
 
 		// control should not reach here if the entry is valid
-		throw std::invalid_argument{"character not in table"};
+		throw std::invalid_argument {"character not in table"};
 	}
 
-	pair<char, char> playfair_table::operator[] (pair<char, char> pt_pair) {
+	pair<char, char> playfair_matrix::operator() (pair<char, char> pt_pair, bool decrypt) {
 		const auto [first_ch, second_ch] = pt_pair;
 		auto first_index = get_index(first_ch);
 		auto second_index = get_index(second_ch);
 
-		return get_cipher_pair(this, first_index, second_index);
+		return get_cipher_pair(this, first_index, second_index, decrypt);
+	}
+
+	string transform(string text, string key, bool decrypt) {
+		normalize(text);
+
+		static const auto degree = playfair_matrix::common_degree;
+		normalize(key, degree*degree);
+
+		playfair_matrix ptable { key };
+		vector< pair<char, char> > ct_pairs;
+
+		auto pt_pairs = get_text_pairs(text);
+
+		for(auto pt_pair : pt_pairs)
+			ct_pairs.push_back(ptable(pt_pair, decrypt));
+
+		return cipher_text(ct_pairs);
 	}
 
 	string encrypt(string plain_text, string key) {
-		normalize(plain_text);
+		return transform(plain_text, key, false);
+	}
 
-		static const auto degree = playfair_table::common_degree;
-		normalize(key, degree*degree);
-
-		playfair_table ptable { key };
-		vector< pair<char, char> > ct_pairs;
-
-		auto pt_pairs = get_plain_text_pairs(plain_text);
-
-		for(auto pt_pair : pt_pairs)
-			ct_pairs.push_back(ptable[pt_pair]);
-
-		return cipher_text(ct_pairs);
+	string decrypt(string cipher_text, string key) {
+		return transform(cipher_text, key, true);
 	}
 }
