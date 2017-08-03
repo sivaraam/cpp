@@ -43,21 +43,24 @@ namespace playfair_cipher {
 		initialize_table(key);
 	}
 
-	pair<char, char> get_cipher_pair(playfair_matrix *ptable, pair<size_t, size_t> first_index, pair<size_t, size_t>second_index) {
+	pair<char, char> get_cipher_pair(playfair_matrix *ptable, pair<size_t, size_t> first_index, pair<size_t, size_t>second_index, bool decrypt) {
 		auto [first_row, first_col] = first_index;
 		auto [first_cipher_row, first_cipher_col] = first_index;
 		auto [second_row, second_col] = second_index;
 		auto [second_cipher_row, second_cipher_col] = second_index;
 
+		const static int choose_up_offset = -1;
+		const static int choose_down_offset = 1;
+		const int offset = (decrypt) ? choose_up_offset : choose_down_offset;
 		const static size_t degree = playfair_matrix::common_degree;
 
 		if (first_row == second_row) {
-			first_cipher_col = (first_col + 1) % degree;
-			second_cipher_col = (second_col + 1) % degree;
+			first_cipher_col = (first_col + offset) % degree;
+			second_cipher_col = (second_col + offset) % degree;
 		}
 		else if (first_col == second_col) {
-			first_cipher_row = (first_row + 1) % degree;
-			second_cipher_row = (second_row + 1) % degree;
+			first_cipher_row = (first_row + offset) % degree;
+			second_cipher_row = (second_row + offset) % degree;
 		}
 		else {
 			first_cipher_col = second_col;

@@ -36,7 +36,7 @@ namespace playfair_cipher {
 			playfair_matrix(const string key);
 			pair <char, char> operator() (pair<char, char> pt_pair, bool decrypt=false);
 			
-			friend pair<char, char> get_cipher_pair(playfair_matrix *ptable, pair<size_t, size_t> first_index, pair<size_t, size_t>second_index);
+			friend pair<char, char> get_cipher_pair(playfair_matrix *ptable, pair<size_t, size_t> first_index, pair<size_t, size_t>second_index, bool decrypt);
 
 	};
 
