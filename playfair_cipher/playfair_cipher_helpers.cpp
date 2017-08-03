@@ -33,7 +33,8 @@ namespace playfair_cipher {
 		std::copy_if(temp.begin(), temp.end(), std::back_inserter(key),
 			     [&](char c) { return !std::count(temp.begin(), iter++, c); });
 
-		key.resize(max_length);
+		if(key.length() > max_length)
+			key.resize(max_length);
 	}
 
 	// the string's length must be an order of 2

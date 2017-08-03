@@ -15,7 +15,7 @@ namespace playfair_cipher {
 			table[curr_row][curr_col] = key_ch;
 
 			// should have erased at least and at most one character
-			alphabets_copy.erase(alphabets_copy.find(key_ch));
+			alphabets_copy.erase(alphabets_copy.find(key_ch), 1);
 
 			curr_col++;
 			if(curr_col == common_degree) {
@@ -89,6 +89,7 @@ namespace playfair_cipher {
 	string encrypt(string plain_text, string key) {
 		// TODO detect repeated characters and inject 'null' character
 		normalize(plain_text);
+
 		auto degree = playfair_table::common_degree;
 		normalize(key, degree*degree);
 
