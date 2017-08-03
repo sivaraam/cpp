@@ -16,13 +16,13 @@ namespace playfair_cipher {
 	}
 
 	void normalize(string& key, size_t max_length) {
-		string temp = key;
+		string temp;
 		std::string::iterator iter = key.begin();
 
 		// for every character in key located at 'loc' tests if there are any such
 		// character in range [begin, loc) and if there is the corresponding character
 		// is not copied
-		std::copy_if(key.begin(), key.end(), temp.begin(),
+		std::copy_if(key.begin(), key.end(), std::back_inserter(temp),
 			     [&](char c) { return !std::count(key.begin(), iter++, c); });
 
 		key = temp;
