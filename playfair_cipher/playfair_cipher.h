@@ -9,7 +9,7 @@ using std::pair;
 
 namespace playfair_cipher {
 
-	class playfair_table {
+	class playfair_matrix {
 
 		const static string alphabets;
 
@@ -27,19 +27,20 @@ namespace playfair_cipher {
 			const static size_t common_degree = 5;
 
 			// delete the unnecessary defaults
-			playfair_table() = delete;
-			playfair_table(const playfair_table&) = delete;
-			playfair_table(playfair_table&&) = delete;
-			playfair_table& operator= (const playfair_table&) = delete;
-			playfair_table& operator= (playfair_table&&) = delete;
+			playfair_matrix() = delete;
+			playfair_matrix(const playfair_matrix&) = delete;
+			playfair_matrix(playfair_matrix&&) = delete;
+			playfair_matrix& operator= (const playfair_matrix&) = delete;
+			playfair_matrix& operator= (playfair_matrix&&) = delete;
 
-			playfair_table(const string key);
-			pair <char, char> operator[] (pair<char, char> pt_pair);
+			playfair_matrix(const string key);
+			pair <char, char> operator() (pair<char, char> pt_pair, bool decrypt);
 			
-			friend pair<char, char> get_cipher_pair(playfair_table *ptable, pair<size_t, size_t> first_index, pair<size_t, size_t>second_index);
+			friend pair<char, char> get_cipher_pair(playfair_matrix *ptable, pair<size_t, size_t> first_index, pair<size_t, size_t>second_index, bool decrypt);
 
 	};
 
-	string encrypt(const string plain_text, const string key);
+	string encrypt(string plain_text, string key);
+	string decrypt(string cipher_text, string key);
 
 }
