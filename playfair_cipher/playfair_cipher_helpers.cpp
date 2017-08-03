@@ -4,11 +4,14 @@
 
 namespace playfair_cipher {
 
-	void normalize(string& text) {
+	static void capitalize(string& str) {
 		// capitablize the characters
 		auto& facet = std::use_facet<std::ctype<char>>(std::locale());
-		facet.toupper(&text[0], &text[0] + text.length());
+		facet.toupper(&str[0], &str[0] + str.length());
+	}
 
+	void normalize(string& text) {
+		capitalize(text);
 		const static char dummy = 'A';
 		if( (text.length() % 2) != 0 ) {
 			text.push_back(dummy);
@@ -16,6 +19,7 @@ namespace playfair_cipher {
 	}
 
 	void normalize(string& key, size_t max_length) {
+		capitalize(key);
 		string temp;
 		std::string::iterator iter = key.begin();
 
