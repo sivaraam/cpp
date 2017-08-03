@@ -78,6 +78,13 @@ namespace playfair_cipher {
 			}
 		}
 
+		// work around for an alphabet that would not
+		// be present in the table
+		static const size_t missing_alph_row = common_degree - 1;
+		static const size_t missing_alph_col = common_degree - 1;
+		if(isupper(ch))
+			return std::make_pair(missing_alph_row, missing_alph_col);
+
 		// control should not reach here if the entry is valid
 		throw std::invalid_argument{"character not in table"};
 	}
