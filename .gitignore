@@ -7,10 +7,6 @@
 .project
 
 # Ignore the directory containing
-# playful test cases
-test/
-
-# Ignore the directory containing
 # playful c implementations
 c/
 
