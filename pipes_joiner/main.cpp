@@ -3,8 +3,11 @@
 
 int main() {
 
-  pipe_joiner_solver::pipe_joiner pj;
+  pipe_joiner_solver::pipe_joiner pj_instance;
 
-  std::cin>>pj;
-  std::cout<<pj;
+  std::cout<<"Enter the number of pipes followed by their lengths:\n";
+  std::cin>>pj_instance;
+
+  std::cout<<"\nSolution (length of pipes joined):\n";
+  std::cout<<pj_instance;
 }
