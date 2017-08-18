@@ -1,3 +1,4 @@
+
 #include "pipe_joiner.h"
 
 namespace pipe_joiner_solver {
@@ -31,8 +32,16 @@ namespace pipe_joiner_solver {
     join_result_handle = std::async(std::launch::async, join, this->pipe_lengths);
   }
 
-  vector<unsigned> pipe_joiner::get_pipe_lengths() {
-    return join_result_handle.get();
+  tuple<vector<unsigned>, bool> pipe_joiner::get_pipe_lengths() noexcept(false) {
+    auto async_started = join_result_handle.valid();
+
+    if(async_started) {
+      auto result = join_result_handle.get();
+      return std::make_tuple(result, async_started);
+    }
+    else {
+      return std::make_tuple(vector<unsigned> { }, async_started);
+    }
   }
 
   istream& operator>>(istream& is, pipe_joiner& pj_instance) {
@@ -60,10 +69,10 @@ namespace pipe_joiner_solver {
   }
 
   ostream& operator<<(ostream& os, pipe_joiner& pj_instance) {
-    auto pipe_lengths = pj_instance.get_pipe_lengths();
+    auto [pipe_lengths, solved] = pj_instance.get_pipe_lengths();
 
-    if(pipe_lengths.empty()) {
-      os<<"Warning: Problem not yet solved";
+    if(!solved) {
+      os<<"Warning: Problem not yet solved\n";
       return os;
     }
 

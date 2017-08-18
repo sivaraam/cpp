@@ -1,10 +1,12 @@
 #include <set>
 #include <vector>
 #include <iostream>
+#include <tuple>
 #include <future>
 
 using std::multiset;
 using std::vector;
+using std::tuple;
 using std::istream;
 using std::ostream;
 
@@ -35,7 +37,7 @@ namespace pipe_joiner_solver {
         pipe_joiner() = default;
 
         // Returns the result of the core function
-        vector<unsigned> get_pipe_lengths();
+        tuple<vector<unsigned>, bool> get_pipe_lengths();
 
         friend istream& operator>>(istream&, pipe_joiner&);
 
