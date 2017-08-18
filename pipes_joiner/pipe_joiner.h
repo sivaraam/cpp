@@ -2,7 +2,7 @@
 #include <vector>
 #include <iostream>
 
-using std::set;
+using std::multiset;
 using std::vector;
 using std::istream;
 using std::ostream;
@@ -12,7 +12,7 @@ namespace pipe_joiner_solver {
   class pipe_joiner {
 
       // The continers for the input and output
-      set<unsigned> pipe_lengths;
+      multiset<unsigned> pipe_lengths;
       vector<unsigned> join_costs;
 
       // When invoked joins the pipe in pipe_lengths and

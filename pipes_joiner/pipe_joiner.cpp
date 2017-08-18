@@ -3,13 +3,13 @@
 namespace pipe_joiner_solver {
 
   template <typename T>
-  static T extract_first(set<T>& s) {
+  static T extract_first(multiset<T>& s) {
     T val = *s.begin();
     s.erase(s.begin());
     return val;
   }
 
-  static vector<unsigned> join(set<unsigned> pipe_lengths) {
+  static vector<unsigned> join(multiset<unsigned> pipe_lengths) {
     // if there's only one pipe return cost as 0
     if(pipe_lengths.size() == 1)
       return { 0 };
