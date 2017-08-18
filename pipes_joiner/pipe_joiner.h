@@ -13,10 +13,10 @@ namespace pipe_joiner_solver {
 
       // The continers for the input and output
       multiset<unsigned> pipe_lengths;
-      vector<unsigned> join_costs;
+      vector<unsigned> join_pipe_lengths;
 
       // When invoked joins the pipe in pipe_lengths and
-      // fills join_costs with the costs of each step to join them.
+      // fills join_pipe_lengths with the costs of each step to join them.
       // Will not mutate pipe_lengths.
       void solve();
 
