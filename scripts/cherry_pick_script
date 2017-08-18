@@ -1,0 +1,25 @@
+#! /bin/bash
+
+cherry_pick_hashes=`git log hill_cipher..move_to_mtl --oneline | awk '{print $1}' | head -3`
+
+
+ordered_hashes=''
+
+# Order the hashes in which they
+# have to be cherry picked
+for hash in $cherry_pick_hashes
+do
+  ordered_hashes="$hash $ordered_hashes"
+done
+
+for hash in $ordered_hashes
+do
+  git cherry-pick $hash
+  if [ $? != 0 ]
+  then
+    echo "ERROR!"
+    exit 1
+  fi
+done
+
+echo 'Cherry pick successful (probably)'
