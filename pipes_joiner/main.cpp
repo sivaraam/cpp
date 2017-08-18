@@ -5,6 +5,6 @@ int main() {
 
   pipe_joiner_solver::pipe_joiner pj;
 
-  std::cin>>pj;  
+  std::cin>>pj;
   std::cout<<pj;
 }

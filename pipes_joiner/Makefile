@@ -1,5 +1,5 @@
 implementation = "pipe_joiner.cpp"
-test_file = "test.cpp"
+test_file = "main.cpp"
 
 gcc_compatible_compiler = "g++"
 opts = "-std=c++11"
