@@ -27,8 +27,12 @@ namespace pipe_joiner_solver {
     return join_pipe_lengths;
   }
 
-  void pipe_joiner::solve() {
-    this->join_pipe_lengths = join(this->pipe_lengths);
+  void pipe_joiner::solve_async() {
+    join_result_handle = std::async(std::launch::async, join, this->pipe_lengths);
+  }
+
+  vector<unsigned> pipe_joiner::get_pipe_lengths() {
+    return join_result_handle.get();
   }
 
   istream& operator>>(istream& is, pipe_joiner& pj_instance) {
@@ -51,18 +55,20 @@ namespace pipe_joiner_solver {
     }
 
     // to convert into an asynchronous call
-    pj_instance.solve();
+    pj_instance.solve_async();
     return is;
   }
 
-  ostream& operator<<(ostream& os, const pipe_joiner& pj_instance) {
-    if(pj_instance.join_pipe_lengths.empty()) {
+  ostream& operator<<(ostream& os, pipe_joiner& pj_instance) {
+    auto pipe_lengths = pj_instance.get_pipe_lengths();
+
+    if(pipe_lengths.empty()) {
       os<<"Warning: Problem not yet solved";
       return os;
     }
 
-    for(auto join_pipe_length : pj_instance.join_pipe_lengths)
-      os<<join_pipe_length<<'\n';
+    for(auto pipe_length : pipe_lengths)
+      os<<pipe_length<<'\n';
 
     return os;
   }

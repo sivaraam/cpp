@@ -3,6 +3,7 @@ test_file = "main.cpp"
 
 gcc_compatible_compiler = "g++"
 opts = "-std=c++11"
+opts += "-pthread" # option for asynchronous execution
 
 all:
 	# just compile the implementation
