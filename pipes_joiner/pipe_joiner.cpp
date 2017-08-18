@@ -37,7 +37,15 @@ namespace pipe_joiner_solver {
 
     for(int i=0; i<num_pipe_lengths; i++) {
       int curr_pipe_length=0;
+
       is>>curr_pipe_length;
+
+      if(curr_pipe_length <= 0) {
+        is.setstate(std::ios::failbit);
+        pj_instance.pipe_lengths.clear(); // cleanup
+        return is;
+      }
+
       pj_instance.pipe_lengths.insert(curr_pipe_length);
     }
 
@@ -47,6 +55,11 @@ namespace pipe_joiner_solver {
   }
 
   ostream& operator<<(ostream& os, const pipe_joiner& pj_instance) {
+    if(pj_instance.join_pipe_lengths.empty()) {
+      os<<"Warning: Problem not yet solved";
+      return os;
+    }
+
     for(auto join_pipe_length : pj_instance.join_pipe_lengths)
       os<<join_pipe_length<<'\n';
 
