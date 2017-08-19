@@ -11,9 +11,10 @@ namespace pipe_joiner_solver {
 
   // The core function
   static vector<unsigned> join(multiset<unsigned> pipe_lengths) {
-    // if there's only one pipe return cost as 0
+    const static vector<unsigned> single_pipe_join_lengths { 0 };
+    // if there's only one pipe return join length as 0
     if(pipe_lengths.size() == 1)
-      return { 0 };
+      return single_pipe_join_lengths;
     
     vector<unsigned> join_pipe_lengths;
 
