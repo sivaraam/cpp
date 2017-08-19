@@ -3,7 +3,7 @@
 namespace pipe_joiner_solver {
 
   template <typename T>
-  static T extract_first(multiset<T>& s) {
+  inline static T extract_first(multiset<T>& s) {
     T val = *s.begin();
     s.erase(s.begin());
     return val;
