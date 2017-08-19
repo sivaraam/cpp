@@ -1,4 +1,3 @@
-
 #include "pipe_joiner.h"
 
 namespace pipe_joiner_solver {
@@ -10,24 +9,26 @@ namespace pipe_joiner_solver {
     return val;
   }
 
-  // The core function
+  // The core function (invoked asynchronously)
   static vector<unsigned> join(multiset<unsigned> pipe_lengths) {
     const static vector<unsigned> single_pipe_join_lengths { 0 };
+
     // if there's only one pipe return join length as 0
     if(pipe_lengths.size() == 1)
       return single_pipe_join_lengths;
     
-    vector<unsigned> join_pipe_lengths;
+    vector<unsigned> joined_pipe_lengths;
 
     while(pipe_lengths.size() > 1) {
       const unsigned new_pipe_length =  extract_first(pipe_lengths) + extract_first(pipe_lengths);
       pipe_lengths.insert(new_pipe_length);
-      join_pipe_lengths.push_back(new_pipe_length);
+      joined_pipe_lengths.push_back(new_pipe_length);
     }
 
-    return join_pipe_lengths;
+    return joined_pipe_lengths;
   }
 
+  // starts the async invocation of the core function of computing result
   void pipe_joiner::solve_async() {
     join_result_handle = std::async(std::launch::async, join, this->pipe_lengths);
   }
@@ -63,7 +64,6 @@ namespace pipe_joiner_solver {
       pj_instance.pipe_lengths.insert(curr_pipe_length);
     }
 
-    // to convert into an asynchronous call
     pj_instance.solve_async();
     return is;
   }
