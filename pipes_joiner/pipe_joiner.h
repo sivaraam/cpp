@@ -40,9 +40,9 @@ namespace pipe_joiner_solver {
         tuple<vector<unsigned>, bool> get_pipe_lengths() noexcept;
 
         // Gets the input and if it succeeded invokes solve_async
-        friend istream& operator>>(istream&, pipe_joiner&);
+        friend istream& operator>>(istream&, pipe_joiner&) noexcept;
 
   };
 
-  ostream& operator<<(ostream&, pipe_joiner&);
+  ostream& operator<<(ostream&, pipe_joiner&) noexcept;
 }

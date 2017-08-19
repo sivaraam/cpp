@@ -2,6 +2,8 @@
 
 namespace pipe_joiner_solver {
 
+  // declared 'noexcept' because the usage is known to
+  // avoid such invocations
   template <typename T>
   inline static T extract_first(multiset<T>& s) {
     T val = *s.begin();
@@ -10,7 +12,7 @@ namespace pipe_joiner_solver {
   }
 
   // The core function (invoked asynchronously)
-  static vector<unsigned> join(multiset<unsigned> pipe_lengths) {
+  static vector<unsigned> join(multiset<unsigned> pipe_lengths) noexcept {
     const static vector<unsigned> single_pipe_join_lengths { 0 };
 
     // if there's only one pipe return join length as 0
@@ -30,7 +32,7 @@ namespace pipe_joiner_solver {
 
   // starts the async invocation of the core function of computing result
   void pipe_joiner::solve_async() {
-    join_result_handle = std::async(std::launch::async, join, this->pipe_lengths);
+    join_result_handle = std::async(std::launch::async, &join, this->pipe_lengths);
   }
 
   tuple<vector<unsigned>, bool> pipe_joiner::get_pipe_lengths() noexcept {
@@ -46,7 +48,7 @@ namespace pipe_joiner_solver {
     }
   }
 
-  istream& operator>>(istream& is, pipe_joiner& pj_instance) {
+  istream& operator>>(istream& is, pipe_joiner& pj_instance) noexcept {
     int num_pipe_lengths = 0;
 
     is>>num_pipe_lengths;
@@ -69,7 +71,7 @@ namespace pipe_joiner_solver {
     return is;
   }
 
-  ostream& operator<<(ostream& os, pipe_joiner& pj_instance) {
+  ostream& operator<<(ostream& os, pipe_joiner& pj_instance) noexcept {
     auto [pipe_lengths, solved] = pj_instance.get_pipe_lengths();
 
     if(!solved) {
