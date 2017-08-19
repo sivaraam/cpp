@@ -6,7 +6,7 @@
 
 using std::multiset;
 using std::vector;
-using std::tuple;
+using std::pair;
 using std::istream;
 using std::ostream;
 
@@ -36,8 +36,9 @@ namespace pipe_joiner_solver {
 
         pipe_joiner() = default;
 
-        // Returns the result of the core function
-        tuple<vector<unsigned>, bool> get_pipe_lengths() noexcept;
+        // Returns the status of whether the computation has been invoked
+        // and if it has then returns the result of the core function
+        pair<bool, vector<unsigned> > get_pipe_lengths() noexcept;
 
         // Gets the input and if it succeeded invokes solve_async
         friend istream& operator>>(istream&, pipe_joiner&) noexcept;

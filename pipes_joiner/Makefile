@@ -1,8 +1,8 @@
 implementation = "pipe_joiner.cpp"
 test_file = "main.cpp"
 
-gcc_compatible_compiler = "clang++-4.0"
-opts = "-std=c++1z"
+gcc_compatible_compiler = "clang++"
+opts = "-std=c++11"
 opts += "-pthread" # option for asynchronous execution
 
 all:
