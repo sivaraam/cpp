@@ -37,7 +37,7 @@ namespace pipe_joiner_solver {
         pipe_joiner() = default;
 
         // Returns the result of the core function
-        tuple<vector<unsigned>, bool> get_pipe_lengths();
+        tuple<vector<unsigned>, bool> get_pipe_lengths() noexcept;
 
         friend istream& operator>>(istream&, pipe_joiner&);
 

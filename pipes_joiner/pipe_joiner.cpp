@@ -32,7 +32,7 @@ namespace pipe_joiner_solver {
     join_result_handle = std::async(std::launch::async, join, this->pipe_lengths);
   }
 
-  tuple<vector<unsigned>, bool> pipe_joiner::get_pipe_lengths() noexcept(false) {
+  tuple<vector<unsigned>, bool> pipe_joiner::get_pipe_lengths() noexcept {
     auto async_started = join_result_handle.valid();
 
     if(async_started) {
