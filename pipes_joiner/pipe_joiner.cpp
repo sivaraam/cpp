@@ -41,7 +41,8 @@ namespace pipe_joiner_solver {
       return std::make_tuple(result, async_started);
     }
     else {
-      return std::make_tuple(vector<unsigned> { }, async_started);
+      const static vector<unsigned> empty_vector { };
+      return std::make_tuple(empty_vector, async_started);
     }
   }
 
