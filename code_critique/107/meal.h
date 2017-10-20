@@ -21,7 +21,7 @@ struct
   { meal::dinner, "dinner" },
 };
 
-std::istream &operator>>(std::istream &is, 
+std::istream &operator>>(std::istream &is,
   meal &m)
 {
   std::string name;
@@ -38,8 +38,8 @@ std::istream &operator>>(std::istream &is,
   is.setstate(std::ios::failbit);
   return is;
 }
-   
-std::ostream &operator<<(std::ostream &os, 
+
+std::ostream &operator<<(std::ostream &os,
   meal const m)
 {
   for (auto p : names)
@@ -76,4 +76,3 @@ constexpr meal operator&(meal a, meal b)
 static_assert((meal::breakfast | meal::lunch |
  meal::dinner) == (meal::breakfast +
  meal::lunch + meal::dinner), "not distinct");
-
