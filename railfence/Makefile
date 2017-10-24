@@ -3,9 +3,11 @@ implementation += "railfence_helpers.cpp"
 test_file = "cipher_test.cpp"
 
 opts = "-std=c++14"
+opts += "-Wall"
+opts += "-pedantic"
 
 all:
-	g++ $(opts) -c $(implementation)
+	clang++ $(opts) -c $(implementation)
 
 build:
-	g++ $(opts) $(implementation) $(test_file)
+	clang++ $(opts) $(implementation) $(test_file)
