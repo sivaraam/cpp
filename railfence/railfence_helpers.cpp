@@ -8,13 +8,13 @@ namespace railfence {
 	// added to make 'num' a multiple of 'base'
 	//
 	// The return value is in range [0, base)
-	unsigned to_make_multiple(unsigned num, unsigned base) {
+	unsigned to_make_multiple(size_t num, unsigned base) {
 		return std::ceil(float(num)/base)*base - num;
 	}
 
 	void normalize(string &str, unsigned length_should_divide) {
 		const static char filler = 'x';
-		int length = str.length();
+		unsigned length = str.length();
 
 		unsigned to_fill = to_make_multiple(length, length_should_divide);
 

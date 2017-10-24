@@ -15,7 +15,7 @@ namespace railfence {
 		size_t rows, cols;
 
 		public:
-			railfence_matrix(unsigned length, unsigned cols, bool encrypt) {
+			railfence_matrix(size_t length, size_t cols, bool encrypt) {
 				this-> rows = length/cols;
 				this->cols = cols;
 
