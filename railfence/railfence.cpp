@@ -16,7 +16,7 @@ namespace railfence {
 
 		public:
 			railfence_matrix(size_t length, size_t cols, bool encrypt) {
-				this-> rows = length/cols;
+				this->rows = length/cols;
 				this->cols = cols;
 
 				matrix = matrix_type (rows, matrix_col_type(cols));
@@ -25,22 +25,12 @@ namespace railfence {
 
 			// expects that length of 'text' is  a multiple of 'cols'
 			void fill_matrix (string text) {
-				size_t order_1 = 0, order_2 = 0;
-				if(encryption_matrix) {
-					// TODO: Check for misues
-					order_1 = rows;
-					order_2 = cols;
-				} else {
-					order_2 = rows;
-					order_1 = cols;
-				}
-
-				for (size_t i = 0; i<order_1; i++) {
-					for (size_t j = 0; j<order_2; j++) {
+				for (size_t i = 0; i<rows; i++) {
+					for (size_t j = 0; j<cols; j++) {
 						if (encryption_matrix)
-							matrix[i][j] = text[i*order_2+j];
+							matrix[i][j] = text[i*cols+j];
 						else
-							matrix[j][i] = text[i*order_2+j];
+							matrix[i][j] = text[j*rows+i];
 					}
 				}
 			}
