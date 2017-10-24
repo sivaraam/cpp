@@ -7,7 +7,10 @@ using std::vector;
 namespace railfence {
 
 	class railfence_matrix {
-		vector< vector<char> > matrix;
+		typedef vector<char> matrix_col_type;
+		typedef vector<matrix_col_type> matrix_type;
+
+		matrix_type matrix;
 		bool encryption_matrix;
 		size_t rows, cols;
 
@@ -16,7 +19,7 @@ namespace railfence {
 				this-> rows = length/cols;
 				this->cols = cols;
 
-				matrix = vector < vector<char> > (rows, vector<char>(cols));
+				matrix = matrix_type (rows, matrix_col_type(cols));
 				encryption_matrix = encrypt;
 			}
 
