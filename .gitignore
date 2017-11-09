@@ -6,10 +6,6 @@
 # Ignore the eclipse file
 .project
 
-# Ignore the directory containing
-# playful c implementations
-c/
-
 # Ignore the library directories
 boost_1_65_0/
 mtl_root/
